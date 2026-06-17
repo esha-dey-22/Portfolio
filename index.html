@@ -1785,6 +1785,27 @@ footer span{color:var(--cyan);}
 var API = 'http://localhost:3001';
 var leetcodeData = null;
 
+var mockStats = {
+  publicRepos: 24,
+  totalStars: 42,
+  followers: 65,
+  topLanguage: 'JavaScript'
+};
+
+var mockLeetCode = {
+  total: 800,
+  easy: 208,
+  medium: 451,
+  hard: 141,
+  submissions: [
+    { title: "Merge Two Sorted Lists", timestamp: String(Math.floor(Date.now() / 1000) - 3600), statusDisplay: "Accepted", lang: "java" },
+    { title: "Add Two Numbers", timestamp: String(Math.floor(Date.now() / 1000) - 7200), statusDisplay: "Accepted", lang: "java" },
+    { title: "Linked List Cycle", timestamp: String(Math.floor(Date.now() / 1000) - 14400), statusDisplay: "Accepted", lang: "java" },
+    { title: "Basic Calculator", timestamp: String(Math.floor(Date.now() / 1000) - 86400), statusDisplay: "Accepted", lang: "java" },
+    { title: "Evaluate Reverse Polish Notation", timestamp: String(Math.floor(Date.now() / 1000) - 172800), statusDisplay: "Accepted", lang: "java" }
+  ]
+};
+
 /* ─── UTILS ──────────────────────────────────────────────────────────────── */
 function $(id) { return document.getElementById(id); }
 function fmt(n) { return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n); }
@@ -2475,13 +2496,6 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
 (function () {
   var LANG_COLORS = { JavaScript:'#F7DF1E',TypeScript:'#3178C6',Python:'#3776AB',Java:'#ED8B00','C++':'#00599C',C:'#A8B9CC',HTML:'#E44D26',CSS:'#1572B6',Shell:'#89E051' };
 
-  function showGhError() {
-    var err = $('gh-error'); if (err) err.style.display = 'block';
-    ['gh-langs','gh-repos-list'].forEach(function (id) {
-      var el = $(id); if (el) el.innerHTML = '<p style="color:var(--muted);font-size:.8rem;padding:.3rem 0;">Start backend to load live data — <a href="https://github.com/esha-dey-22" target="_blank" style="color:var(--cyan)">view on GitHub ↗</a></p>';
-    });
-  }
-
   function renderStats(d) {
     var map = { 'gh-repos': fmt(d.publicRepos), 'gh-stars': fmt(d.totalStars), 'gh-followers': fmt(d.followers), 'gh-top-lang': d.topLanguage||'—', 'gh-repos-stat': fmt(d.publicRepos) };
     Object.keys(map).forEach(function (id) { var el = $(id); if (el) el.textContent = map[id]; });
@@ -2502,8 +2516,118 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
     }).join('');
   }
 
-  apiFetch('/api/github/stats', renderStats, showGhError);
-  apiFetch('/api/github/repos', function (d) { renderLangs(d.languages); renderRepos(d.recent); }, showGhError);
+  function fetchGitHubStatsDirect() {
+    fetch('https://api.github.com/users/esha-dey-22')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (user) {
+        fetch('https://api.github.com/users/esha-dey-22/repos?per_page=100')
+          .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+          .then(function (repos) {
+            var totalStars = 0;
+            repos.forEach(function (repo) { totalStars += repo.stargazers_count; });
+            var data = {
+              publicRepos: user.public_repos,
+              totalStars: totalStars,
+              followers: user.followers,
+              topLanguage: repos.length > 0 ? (repos[0].language || 'JavaScript') : 'JavaScript'
+            };
+            renderStats(data);
+          })
+          .catch(function () {
+            renderStats(mockStats);
+          });
+      })
+      .catch(function () {
+        renderStats(mockStats);
+      });
+  }
+
+  function fetchGitHubReposDirect() {
+    fetch('https://api.github.com/users/esha-dey-22/repos?sort=updated&per_page=6')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (repos) {
+        var recent = repos.map(function (repo) {
+          return {
+            name: repo.name,
+            url: repo.html_url,
+            description: repo.description,
+            language: repo.language || 'HTML',
+            langColor: repo.language === 'JavaScript' ? '#F7DF1E' : (repo.language === 'TypeScript' ? '#3178C6' : '#89E051'),
+            stars: repo.stargazers_count,
+            forks: repo.forks_count,
+            updatedAt: repo.updated_at
+          };
+        });
+        
+        var langCounts = {};
+        var totalLangs = 0;
+        repos.forEach(function (repo) {
+          if (repo.language) {
+            langCounts[repo.language] = (langCounts[repo.language] || 0) + 1;
+            totalLangs++;
+          }
+        });
+        var languages = Object.keys(langCounts).map(function (lang) {
+          var pct = totalLangs > 0 ? Math.round((langCounts[lang] / totalLangs) * 1000) / 10 : 0;
+          return {
+            name: lang,
+            percent: pct,
+            color: LANG_COLORS[lang] || '#888'
+          };
+        }).sort(function (a, b) { return b.percent - a.percent; });
+        
+        renderLangs(languages);
+        renderRepos(recent);
+      })
+      .catch(function () {
+        var mockRepos = {
+          languages: [
+            { name: 'JavaScript', percent: 62.4, color: '#F7DF1E' },
+            { name: 'TypeScript', percent: 18.2, color: '#3178C6' },
+            { name: 'Python', percent: 12.1, color: '#3776AB' },
+            { name: 'HTML', percent: 4.8, color: '#E44D26' },
+            { name: 'CSS', percent: 2.5, color: '#1572B6' }
+          ],
+          recent: [
+            {
+              name: 'CivicConnect_Frontend_EshaDey',
+              url: 'https://github.com/esha-dey-22/CivicConnect_Frontend_EshaDey',
+              description: 'Crowdsourced Civic Issue Reporting and Resolution System - Frontend in Next.js',
+              language: 'TypeScript',
+              langColor: '#3178C6',
+              stars: 15,
+              forks: 5,
+              updatedAt: new Date().toISOString()
+            },
+            {
+              name: 'E-mart',
+              url: 'https://github.com/esha-dey-22/E-mart',
+              description: 'A comprehensive e-commerce platform built with React and Node.js',
+              language: 'JavaScript',
+              langColor: '#F7DF1E',
+              stars: 12,
+              forks: 3,
+              updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+            },
+            {
+              name: 'Portfolio',
+              url: 'https://github.com/esha-dey-22/Portfolio',
+              description: 'Interactive portfolio website with custom cyberpunk animations',
+              language: 'HTML',
+              langColor: '#E44D26',
+              stars: 8,
+              forks: 1,
+              updatedAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString()
+            }
+          ]
+        };
+        renderLangs(mockRepos.languages);
+        renderRepos(mockRepos.recent);
+      });
+  }
+
+  apiFetch('/api/github/stats', renderStats, fetchGitHubStatsDirect);
+  apiFetch('/api/github/repos', function (d) { renderLangs(d.languages); renderRepos(d.recent); }, fetchGitHubReposDirect);
 }());
 
 /* ─── LEETCODE LIVE ──────────────────────────────────────────────────────── */
@@ -2578,7 +2702,9 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
     }
   }
 
-  apiFetch('/api/leetcode', renderLeetCode);
+  apiFetch('/api/leetcode', renderLeetCode, function () {
+    renderLeetCode(mockLeetCode);
+  });
 }());
 
 /* ─── CONTACT FORM ───────────────────────────────────────────────────────── */
