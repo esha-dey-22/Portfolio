@@ -59,9 +59,10 @@ button{font-family:var(--font-b);cursor:none;}
 .ring-tick:nth-child(3),.ring-tick:nth-child(4){width:1.5px;height:5px;top:50%;transform:translateY(-50%);}
 .ring-tick:nth-child(3){left:-2px;}
 .ring-tick:nth-child(4){right:-2px;}
-#cur-hud-text{position:fixed;pointer-events:none;z-index:99999;font-family:var(--font-d),monospace;font-size:0.55rem;color:var(--cyan);white-space:nowrap;letter-spacing:0.1em;transform:translate(22px,-50%);opacity:0;transition:opacity .25s,color .25s;text-shadow:0 0 5px var(--gborder2);}
+#bg-canvas,#matrix-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+#matrix-canvas{opacity:.038;}
 #cur-glow{position:fixed;width:220px;height:220px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(0,229,255,.055) 0%,transparent 70%);transform:translate(-50%,-50%);transition:transform .14s;}
-body.no-cursor #cur-dot,body.no-cursor #cur-ring,body.no-cursor #cur-glow,body.no-cursor #cur-hud-text{display:none;}
+body.no-cursor #cur-dot,body.no-cursor #cur-ring,body.no-cursor #cur-glow{display:none;}
 
 /* AURORA */
 #aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
@@ -1400,7 +1401,6 @@ footer span{color:var(--cyan);}
   <span class="ring-tick"></span>
   <span class="ring-tick"></span>
 </div>
-<div id="cur-hud-text"></div>
 <div id="cur-glow"></div>
 <div id="aurora"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
 <canvas id="matrix-canvas"></canvas>
@@ -2374,16 +2374,13 @@ function apiFetch(path, cb, errCb) {
 /* ─── CURSOR ─────────────────────────────────────────────────────────────── */
 (function () {
   if (window.innerWidth < 992) { document.body.classList.add('no-cursor'); return; }
-  var dot  = $('cur-dot'), ring = $('cur-ring'), glow = $('cur-glow'), hudText = $('cur-hud-text');
+  var dot  = $('cur-dot'), ring = $('cur-ring'), glow = $('cur-glow');
   if (!dot) return;
   var mx = 0, my = 0, rx = 0, ry = 0;
   document.addEventListener('mousemove', function (e) {
     mx = e.clientX; my = e.clientY;
     dot.style.left  = mx + 'px'; dot.style.top  = my + 'px';
     glow.style.left = mx + 'px'; glow.style.top = my + 'px';
-    if (hudText) {
-      hudText.style.left = mx + 'px'; hudText.style.top = my + 'px';
-    }
   });
   (function lerp() {
     rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
@@ -2412,35 +2409,15 @@ function apiFetch(path, cb, errCb) {
     }, 100);
   });
 
-  // Dynamic context-aware HUD labels
-  function getHoverContext(el) {
-    if (el.classList.contains('soc')) return '[ESTABLISH_COMM]';
-    if (el.classList.contains('proj-card')) return '[DECRYPT_PROJECT]';
-    if (el.classList.contains('sk-card')) return '[ANALYZE_SKILL]';
-    if (el.classList.contains('orbit-item')) return '[ORBITAL_SYS]';
-    if (el.classList.contains('btn-primary') || el.classList.contains('btn-ghost')) return '[EXECUTE_CMD]';
-    if (el.tagName === 'A' && el.getAttribute('href') && el.getAttribute('href').startsWith('#')) return '[GOTO_SECTION]';
-    if (el.tagName === 'A') return '[EXT_LINK]';
-    return '[ENGAGE]';
-  }
-
-  // Hover animations and text hooks
+  // Hover animations
   document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item').forEach(function (el) {
     el.addEventListener('mouseenter', function () {
       dot.style.width = '12px'; dot.style.height = '12px'; dot.style.background = 'var(--violet2)';
       ring.style.width = '48px'; ring.style.height = '48px'; ring.style.borderColor = 'var(--violet2)';
-      if (hudText) {
-        hudText.textContent = getHoverContext(el);
-        hudText.style.opacity = '1';
-        hudText.style.color = 'var(--violet2)';
-      }
     });
     el.addEventListener('mouseleave', function () {
       dot.style.width = '8px'; dot.style.height = '8px'; dot.style.background = 'var(--cyan)';
       ring.style.width = '38px'; ring.style.height = '38px'; ring.style.borderColor = 'rgba(0,229,255,.45)';
-      if (hudText) {
-        hudText.style.opacity = '0';
-      }
     });
   });
 }());
