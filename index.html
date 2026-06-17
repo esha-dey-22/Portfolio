@@ -1701,7 +1701,7 @@ footer span{color:var(--cyan);}
           <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" name="message" placeholder="Tell me more…" required></textarea></div>
           <button type="submit" class="btn-primary" id="submit-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send Message</button>
           <div id="form-status"></div>
-          <p style="font-size:.7rem;color:var(--muted);text-align:center;margin-top:.4rem;" id="form-note">Start the backend (<code>node server.js</code>) to enable real email delivery.</p>
+          <p style="font-size:.7rem;color:var(--muted);text-align:center;margin-top:.4rem;display:none;" id="form-note">Start the backend (<code>node server.js</code>) to enable real email delivery.</p>
         </form>
       </div>
     </div>
@@ -2742,9 +2742,9 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
   var form = $('contactForm'), status = $('form-status'), btn = $('submit-btn'), note = $('form-note');
   if (!form) return;
 
-  // Hide backend reminder note on production/hosted domains
-  if (note && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    note.style.display = 'none';
+  // Show backend reminder note only on local development
+  if (note && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    note.style.display = 'block';
   }
 
   function resetBtn() {
