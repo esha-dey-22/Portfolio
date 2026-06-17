@@ -2702,15 +2702,50 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
     }
   }
 
-  apiFetch('/api/leetcode', renderLeetCode, function () {
-    renderLeetCode(mockLeetCode);
-  });
+  function fetchLeetCodeDirect() {
+    fetch('https://alfa-leetcode-api.onrender.com/ed0629/solved')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (solvedData) {
+        fetch('https://alfa-leetcode-api.onrender.com/ed0629/submission?limit=6')
+          .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+          .then(function (subData) {
+            var data = {
+              total: solvedData.solvedProblem,
+              easy: solvedData.easySolved,
+              medium: solvedData.mediumSolved,
+              hard: solvedData.hardSolved,
+              submissions: subData.submission || []
+            };
+            renderLeetCode(data);
+          })
+          .catch(function () {
+            var data = {
+              total: solvedData.solvedProblem,
+              easy: solvedData.easySolved,
+              medium: solvedData.mediumSolved,
+              hard: solvedData.hardSolved,
+              submissions: mockLeetCode.submissions
+            };
+            renderLeetCode(data);
+          });
+      })
+      .catch(function () {
+        renderLeetCode(mockLeetCode);
+      });
+  }
+
+  apiFetch('/api/leetcode', renderLeetCode, fetchLeetCodeDirect);
 }());
 
 /* ─── CONTACT FORM ───────────────────────────────────────────────────────── */
 (function () {
   var form = $('contactForm'), status = $('form-status'), btn = $('submit-btn'), note = $('form-note');
   if (!form) return;
+
+  // Hide backend reminder note on production/hosted domains
+  if (note && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    note.style.display = 'none';
+  }
 
   function resetBtn() {
     btn.disabled = false;
@@ -2742,7 +2777,7 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
           if (note) note.style.display = 'none';
         } else { showStatus('✕ ' + (res.error||'Something went wrong.'), false); }
       })
-      .catch(function () { showStatus('✕ Backend offline. Email edey38111@gmail.com directly.', false); })
+      .catch(function () { showStatus('✕ Connection error. Please email edey38111@gmail.com directly.', false); })
       .finally(resetBtn);
   });
 }());
