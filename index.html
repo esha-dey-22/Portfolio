@@ -3179,34 +3179,66 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
   }
 
   function fetchLeetCodeDirect() {
-    fetch('https://alfa-leetcode-api.onrender.com/ed0629/solved')
+    // Tier 1: High-speed Vercel hosted proxy
+    fetch('https://leetcode-api-faisal.vercel.app/ed0629')
       .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function (solvedData) {
-        fetch('https://alfa-leetcode-api.onrender.com/ed0629/submission?limit=6')
-          .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-          .then(function (subData) {
-            var data = {
-              total: solvedData.solvedProblem,
-              easy: solvedData.easySolved,
-              medium: solvedData.mediumSolved,
-              hard: solvedData.hardSolved,
-              submissions: subData.submission || []
-            };
-            renderLeetCode(data);
-          })
-          .catch(function () {
-            var data = {
-              total: solvedData.solvedProblem,
-              easy: solvedData.easySolved,
-              medium: solvedData.mediumSolved,
-              hard: solvedData.hardSolved,
-              submissions: mockLeetCode.submissions
-            };
-            renderLeetCode(data);
-          });
+      .then(function (data) {
+        if (data && data.matchedUserStats && data.matchedUserStats.acSubmissionNum) {
+          var acs = data.matchedUserStats.acSubmissionNum;
+          var totalSolved = 808, easySolved = 209, mediumSolved = 457, hardSolved = 142;
+          
+          for (var i = 0; i < acs.length; i++) {
+            var item = acs[i];
+            if (item.difficulty === 'All') totalSolved = item.count;
+            else if (item.difficulty === 'Easy') easySolved = item.count;
+            else if (item.difficulty === 'Medium') mediumSolved = item.count;
+            else if (item.difficulty === 'Hard') hardSolved = item.count;
+          }
+
+          var payload = {
+            total: totalSolved,
+            easy: easySolved,
+            medium: mediumSolved,
+            hard: hardSolved,
+            submissions: data.recentSubmissions || []
+          };
+          renderLeetCode(payload);
+        } else {
+          throw new Error("Invalid response format");
+        }
       })
       .catch(function () {
-        renderLeetCode(mockLeetCode);
+        // Tier 2: Fallback to Render API
+        fetch('https://alfa-leetcode-api.onrender.com/ed0629/solved')
+          .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+          .then(function (solvedData) {
+            fetch('https://alfa-leetcode-api.onrender.com/ed0629/submission?limit=6')
+              .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+              .then(function (subData) {
+                var payload = {
+                  total: solvedData.solvedProblem,
+                  easy: solvedData.easySolved,
+                  medium: solvedData.mediumSolved,
+                  hard: solvedData.hardSolved,
+                  submissions: subData.submission || []
+                };
+                renderLeetCode(payload);
+              })
+              .catch(function () {
+                var payload = {
+                  total: solvedData.solvedProblem,
+                  easy: solvedData.easySolved,
+                  medium: solvedData.mediumSolved,
+                  hard: solvedData.hardSolved,
+                  submissions: mockLeetCode.submissions
+                };
+                renderLeetCode(payload);
+              });
+          })
+          .catch(function () {
+            // Tier 3: Static Mock Fallback
+            renderLeetCode(mockLeetCode);
+          });
       });
   }
 
