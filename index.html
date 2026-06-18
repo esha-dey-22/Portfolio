@@ -371,12 +371,29 @@ section.visible .wipe-line{transform:scaleX(1);}
 
 
 /* PROJECTS */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem;}
-.proj-card{background:var(--glass);border:1px solid var(--gborder);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--t),box-shadow var(--t);transform-style:preserve-3d;will-change:transform;}
-.proj-card:hover{border-color:rgba(0,229,255,.24);box-shadow:0 18px 55px rgba(0,229,255,.07);}
-.proj-bar{height:2px;background:linear-gradient(90deg,var(--cyan),var(--violet2));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.6rem;}
+.proj-card{background:var(--glass);border:1px solid var(--gborder);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--t),box-shadow var(--t),transform var(--t);transform-style:preserve-3d;will-change:transform;position:relative;}
+.proj-card:hover{border-color:rgba(0,229,255,0.24);box-shadow:0 20px 50px rgba(0,229,255,0.08);transform:translateY(-6px);}
+.proj-bar{height:2px;background:linear-gradient(90deg,var(--cyan),var(--violet2));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.4,0,.2,1);position:absolute;top:0;left:0;width:100%;z-index:2;}
 .proj-card:hover .proj-bar{transform:scaleX(1);}
-.proj-body{padding:1.65rem;flex:1;display:flex;flex-direction:column;}
+.proj-banner {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid var(--gborder);
+  background: rgba(10, 16, 32, 0.5);
+}
+.proj-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.proj-card:hover .proj-banner-img {
+  transform: scale(1.04);
+}
+.proj-body{padding:1.4rem;flex:1;display:flex;flex-direction:column;}
 .proj-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem;}
 .proj-badge{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:.2rem .65rem;border-radius:100px;}
 .b-feat{color:var(--cyan);background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.22);}
@@ -385,12 +402,44 @@ section.visible .wipe-line{transform:scaleX(1);}
 .b-fe{color:#F472B6;background:rgba(244,114,182,.08);border:1px solid rgba(244,114,182,.18);}
 .b-sys{color:#FB923C;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.18);}
 .proj-date{font-size:.68rem;color:var(--muted);font-family:var(--font-d);letter-spacing:.07em;}
-.proj-title{font-family:var(--font-d);font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.6rem;line-height:1.3;}
-.proj-desc{font-size:.83rem;color:var(--muted2);line-height:1.75;flex:1;margin-bottom:1.1rem;}
+.proj-title{font-family:var(--font-d);font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:.6rem;line-height:1.3;}
+.proj-desc{font-size:.83rem;color:var(--muted2);line-height:1.6;flex:1;margin-bottom:1.1rem;}
 .proj-tech{display:flex;flex-wrap:wrap;gap:.32rem;margin-bottom:1.3rem;}
 .tech-chip{padding:.16rem .52rem;border-radius:4px;font-size:.67rem;font-weight:500;background:rgba(123,47,190,.12);border:1px solid rgba(123,47,190,.24);color:#C084FC;}
-.proj-links{display:flex;gap:.9rem;}
-.proj-link{display:inline-flex;align-items:center;gap:.32rem;font-size:.74rem;font-weight:600;color:var(--cyan);border-bottom:1px solid transparent;transition:border-color var(--t);padding-bottom:1px;}
+.proj-action-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-top: auto;
+}
+.proj-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--gborder);
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--t), background var(--t), border-color var(--t), transform var(--t);
+}
+.proj-action-btn:hover {
+  color: var(--white);
+  background: rgba(0, 229, 255, 0.08);
+  border-color: var(--cyan);
+  transform: translateY(-1px);
+}
+.proj-action-btn svg.btn-icon {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
 
 /* TECHNICAL IMPACT SECTION */
 #tech-impact {
@@ -1935,41 +1984,171 @@ footer span{color:var(--cyan);}
     <p class="s-label reveal">work</p>
     <h2 class="s-title reveal">Featured <span>Projects</span></h2>
     <div class="proj-grid">
-      <div class="proj-card reveal" onclick="openProjectModal('civicconnect')" style="cursor: pointer;"><div class="proj-bar"></div><div class="proj-body">
-        <div class="proj-meta"><span class="proj-badge b-feat">✦ Featured</span><span class="proj-date">2025</span></div>
-        <div class="proj-title">CivicConnect — AI Civic Platform</div>
-        <p class="proj-desc">Smart civic engagement platform empowering communities to report local issues. AI-powered sentiment analysis via VADER NLP, duplicate detection using TF-IDF &amp; Cosine Similarity, real-time map with density markers, and automated Gmail notifications.</p>
-        <div class="proj-tech"><span class="tech-chip">Next.js 15</span><span class="tech-chip">Node.js</span><span class="tech-chip">MongoDB</span><span class="tech-chip">FastAPI</span><span class="tech-chip">Python</span><span class="tech-chip">NLP</span><span class="tech-chip">Clerk Auth</span></div>
-        <div class="proj-links" onclick="event.stopPropagation()"><a href="https://github.com/esha-dey-22/CivicConnect" target="_blank" rel="noopener" class="proj-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a><button class="proj-link arch-btn" onclick="openArchModal('civicconnect'); event.stopPropagation();"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Architecture</button></div>
-      </div></div>
-      <div class="proj-card reveal" onclick="openProjectModal('localmarket')" style="cursor: pointer;"><div class="proj-bar"></div><div class="proj-body">
-        <div class="proj-meta"><span class="proj-badge b-fs">Full-Stack</span><span class="proj-date">Apr 2025</span></div>
-        <div class="proj-title">Online Market for Local Vendors</div>
-        <p class="proj-desc">Full-stack marketplace platform for local vendor visibility. Features vendor registration, product listings with images, vendor-specific pages — connecting small businesses with customers.</p>
-        <div class="proj-tech"><span class="tech-chip">Node.js</span><span class="tech-chip">Express.js</span><span class="tech-chip">MongoDB</span><span class="tech-chip">JavaScript</span><span class="tech-chip">Jenkins</span><span class="tech-chip">Docker</span></div>
-        <div class="proj-links" onclick="event.stopPropagation()"><a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a><button class="proj-link arch-btn" onclick="openArchModal('localmarket'); event.stopPropagation();"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Architecture</button></div>
-      </div></div>
-      <div class="proj-card reveal" onclick="openProjectModal('streamflare')" style="cursor: pointer;"><div class="proj-bar"></div><div class="proj-body">
-        <div class="proj-meta"><span class="proj-badge b-fe">Frontend</span><span class="proj-date">Nov 2024</span></div>
-        <div class="proj-title">StreamFlare — Entertainment Hub</div>
-        <p class="proj-desc">Netflix-inspired entertainment platform featuring movies, music and games. Showcases responsive front-end architecture and CI/CD deployment via Jenkins and Docker Hub.</p>
-        <div class="proj-tech"><span class="tech-chip">HTML/CSS/JS</span><span class="tech-chip">Bootstrap</span><span class="tech-chip">Jenkins</span><span class="tech-chip">Docker Hub</span><span class="tech-chip">Git</span></div>
-        <div class="proj-links" onclick="event.stopPropagation()"><a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a><button class="proj-link arch-btn" onclick="openArchModal('streamflare'); event.stopPropagation();"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Architecture</button></div>
-      </div></div>
-      <div class="proj-card reveal" onclick="openProjectModal('markstracker')" style="cursor: pointer;"><div class="proj-bar"></div><div class="proj-body">
-        <div class="proj-meta"><span class="proj-badge b-sys">Systems</span><span class="proj-date">Dec 2022</span></div>
-        <div class="proj-title">Marks Update Tracker</div>
-        <p class="proj-desc">Python program to track and analyse student mark updates. Identifies the highest-scoring student post-update and calculates rank jumps using data manipulation and algorithmic problem-solving.</p>
-        <div class="proj-tech"><span class="tech-chip">Python</span><span class="tech-chip">Data Structures</span><span class="tech-chip">Algorithms</span></div>
-        <div class="proj-links" onclick="event.stopPropagation()"><a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a></div>
-      </div></div>
-      <div class="proj-card reveal" onclick="openProjectModal('fitclub')" style="cursor: pointer;"><div class="proj-bar"></div><div class="proj-body">
-        <div class="proj-meta"><span class="proj-badge b-sys">Systems</span><span class="proj-date">Sep 2022</span></div>
-        <div class="proj-title">Fitness Club Management System</div>
-        <p class="proj-desc">C-based record management system for fitness club owners. Stores and retrieves member details — BMI, joining dates, package types, and training periods.</p>
-        <div class="proj-tech"><span class="tech-chip">C Language</span><span class="tech-chip">Data Management</span><span class="tech-chip">File I/O</span></div>
-        <div class="proj-links" onclick="event.stopPropagation()"><a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a></div>
-      </div></div>
+      <!-- CivicConnect -->
+      <div class="proj-card reveal" onclick="openProjectModal('civicconnect')" style="cursor: pointer;">
+        <div class="proj-bar"></div>
+        <div class="proj-banner">
+          <img src="civicconnect_banner.png" alt="CivicConnect Banner" class="proj-banner-img" />
+        </div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-badge b-feat">✦ Featured</span><span class="proj-date">2025</span></div>
+          <h3 class="proj-title">CivicConnect — AI Civic Platform</h3>
+          <p class="proj-desc">AI-powered civic issue tracking and deduplication portal. Smart complaint sorting with NLP analysis.</p>
+          <div class="proj-tech">
+            <span class="tech-chip">Next.js 15</span>
+            <span class="tech-chip">FastAPI</span>
+            <span class="tech-chip">MongoDB</span>
+            <span class="tech-chip">VADER NLP</span>
+            <span class="tech-chip">Clerk Auth</span>
+          </div>
+          <div class="proj-action-row" onclick="event.stopPropagation()">
+            <a href="https://github.com/esha-dey-22/CivicConnect" target="_blank" rel="noopener" class="proj-action-btn github">
+              <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              Code
+            </a>
+            <a href="https://github.com/esha-dey-22/CivicConnect" target="_blank" rel="noopener" class="proj-action-btn demo">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Demo
+            </a>
+            <button class="proj-action-btn arch" onclick="openArchModal('civicconnect'); event.stopPropagation();">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              Arch
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Local Market -->
+      <div class="proj-card reveal" onclick="openProjectModal('localmarket')" style="cursor: pointer;">
+        <div class="proj-bar"></div>
+        <div class="proj-banner">
+          <img src="localmarket_banner.png" alt="Local Market Banner" class="proj-banner-img" />
+        </div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-badge b-fs">Full-Stack</span><span class="proj-date">Apr 2025</span></div>
+          <h3 class="proj-title">Online Market for Local Vendors</h3>
+          <p class="proj-desc">Hyper-local marketplace platform connecting neighborhood merchants with nearby buyers.</p>
+          <div class="proj-tech">
+            <span class="tech-chip">Node.js</span>
+            <span class="tech-chip">Express.js</span>
+            <span class="tech-chip">MongoDB</span>
+            <span class="tech-chip">Jenkins</span>
+            <span class="tech-chip">Docker</span>
+          </div>
+          <div class="proj-action-row" onclick="event.stopPropagation()">
+            <a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-action-btn github">
+              <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              Code
+            </a>
+            <a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-action-btn demo">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Demo
+            </a>
+            <button class="proj-action-btn arch" onclick="openArchModal('localmarket'); event.stopPropagation();">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              Arch
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- StreamFlare -->
+      <div class="proj-card reveal" onclick="openProjectModal('streamflare')" style="cursor: pointer;">
+        <div class="proj-bar"></div>
+        <div class="proj-banner">
+          <img src="streamflare_banner.png" alt="StreamFlare Banner" class="proj-banner-img" />
+        </div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-badge b-fe">Frontend</span><span class="proj-date">Nov 2024</span></div>
+          <h3 class="proj-title">StreamFlare — Entertainment Hub</h3>
+          <p class="proj-desc">Netflix-inspired responsive entertainment dashboard featuring movie and music sliders.</p>
+          <div class="proj-tech">
+            <span class="tech-chip">HTML/CSS/JS</span>
+            <span class="tech-chip">Bootstrap</span>
+            <span class="tech-chip">Jenkins</span>
+            <span class="tech-chip">Docker Hub</span>
+            <span class="tech-chip">Git</span>
+          </div>
+          <div class="proj-action-row" onclick="event.stopPropagation()">
+            <a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-action-btn github">
+              <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              Code
+            </a>
+            <a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-action-btn demo">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Demo
+            </a>
+            <button class="proj-action-btn arch" onclick="openArchModal('streamflare'); event.stopPropagation();">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              Arch
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marks Update Tracker -->
+      <div class="proj-card reveal" onclick="openProjectModal('markstracker')" style="cursor: pointer;">
+        <div class="proj-bar"></div>
+        <div class="proj-banner">
+          <img src="markstracker_banner.png" alt="Marks Tracker Banner" class="proj-banner-img" />
+        </div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-badge b-sys">Systems</span><span class="proj-date">Dec 2022</span></div>
+          <h3 class="proj-title">Marks Update Tracker</h3>
+          <p class="proj-desc">CLI Python program tracking post-update student performance and academic rank jumps.</p>
+          <div class="proj-tech">
+            <span class="tech-chip">Python</span>
+            <span class="tech-chip">Data Structures</span>
+            <span class="tech-chip">Algorithms</span>
+          </div>
+          <div class="proj-action-row" onclick="event.stopPropagation()">
+            <a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-action-btn github">
+              <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              Code
+            </a>
+            <a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-action-btn demo">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Demo
+            </a>
+            <button class="proj-action-btn arch" onclick="openArchModal('markstracker'); event.stopPropagation();">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              Arch
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fitness Club System -->
+      <div class="proj-card reveal" onclick="openProjectModal('fitclub')" style="cursor: pointer;">
+        <div class="proj-bar"></div>
+        <div class="proj-banner">
+          <img src="fitclub_banner.png" alt="Fitness Club Banner" class="proj-banner-img" />
+        </div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-badge b-sys">Systems</span><span class="proj-date">Sep 2022</span></div>
+          <h3 class="proj-title">Fitness Club Management System</h3>
+          <p class="proj-desc">C-based record management system with file I/O for fitness club client details.</p>
+          <div class="proj-tech">
+            <span class="tech-chip">C Language</span>
+            <span class="tech-chip">Binary File I/O</span>
+            <span class="tech-chip">BMI Calculator</span>
+          </div>
+          <div class="proj-action-row" onclick="event.stopPropagation()">
+            <a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-action-btn github">
+              <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              Code
+            </a>
+            <a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-action-btn demo">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Demo
+            </a>
+            <button class="proj-action-btn arch" onclick="openArchModal('fitclub'); event.stopPropagation();">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              Arch
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2926,6 +3105,80 @@ function apiFetch(path, cb, errCb) {
         '  <text x="440" y="295" fill="#10B981" font-size="11" font-family="monospace" text-anchor="middle" font-weight="bold">Deployment</text>' +
         '</g>' +
         '</svg>'
+    },
+    markstracker: {
+      title: "Marks Tracker Pipeline Architecture",
+      svg: '<svg viewBox="0 0 720 340" class="arch-svg">' +
+        '<defs>' +
+        '  <marker id="arr-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 L8 5 L0 8.5 z" fill="var(--cyan)" /></marker>' +
+        '  <marker id="arr-violet" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 L8 5 L0 8.5 z" fill="var(--violet2)" /></marker>' +
+        '  <marker id="arr-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 L8 5 L0 8.5 z" fill="#10B981" /></marker>' +
+        '  <marker id="arr-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 L8 5 L0 8.5 z" fill="#F59E0B" /></marker>' +
+        '</defs>' +
+        '<!-- Connections -->' +
+        '<path d="M 100 120 L 150 120" stroke="var(--cyan)" stroke-dasharray="4" stroke-width="1.5" fill="none" marker-end="url(#arr-cyan)" />' +
+        '<path d="M 270 120 L 380 120" stroke="var(--violet2)" stroke-dasharray="4" stroke-width="1.5" fill="none" marker-end="url(#arr-violet)" />' +
+        '<path d="M 500 120 L 590 120" stroke="#10B981" stroke-dasharray="4" stroke-width="1.5" fill="none" marker-end="url(#arr-green)" />' +
+        '<path d="M 440 140 L 440 185" stroke="#F59E0B" stroke-dasharray="4" stroke-width="1.5" fill="none" marker-end="url(#arr-amber)" />' +
+        '<!-- Nodes -->' +
+        '<g>' +
+        '  <rect x="30" y="100" width="70" height="40" rx="6" fill="rgba(255,255,255,0.03)" stroke="var(--gborder)" stroke-width="1.5" />' +
+        '  <text x="65" y="125" fill="var(--white)" font-size="11" font-family="monospace" text-anchor="middle">👤 User</text>' +
+        '</g>' +
+        '<g>' +
+        '  <rect x="150" y="100" width="120" height="40" rx="6" fill="rgba(0,229,255,0.04)" stroke="var(--cyan)" stroke-width="1.5" />' +
+        '  <text x="210" y="125" fill="var(--cyan)" font-size="11" font-family="monospace" text-anchor="middle" font-weight="bold">CLI Input</text>' +
+        '</g>' +
+        '<g>' +
+        '  <rect x="380" y="100" width="120" height="40" rx="6" fill="rgba(168,85,247,0.04)" stroke="var(--violet2)" stroke-width="1.5" />' +
+        '  <text x="440" y="125" fill="var(--violet2)" font-size="11" font-family="monospace" text-anchor="middle" font-weight="bold">Python Engine</text>' +
+        '</g>' +
+        '<g>' +
+        '  <rect x="590" y="100" width="100" height="40" rx="6" fill="rgba(16,185,129,0.04)" stroke="#10B981" stroke-width="1.5" />' +
+        '  <text x="640" y="125" fill="#10B981" font-size="11" font-family="monospace" text-anchor="middle" font-weight="bold">Sorting Algo</text>' +
+        '</g>' +
+        '<g>' +
+        '  <rect x="360" y="185" width="160" height="40" rx="6" fill="rgba(245,158,11,0.04)" stroke="#F59E0B" stroke-width="1.5" />' +
+        '  <text x="440" y="210" fill="#F59E0B" font-size="10" font-family="monospace" text-anchor="middle" font-weight="bold">Rank/Delta Analyzer</text>' +
+        '</g>' +
+        '</svg>'
+    },
+    fitclub: {
+      title: "Fitness Club Management Architecture",
+      svg: '<svg viewBox="0 0 720 340" class="arch-svg">' +
+        '<defs>' +
+        '  <marker id="arr-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 L8 5 L0 8.5 z" fill="var(--cyan)" /></marker>' +
+        '  <marker id="arr-violet" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 L8 5 L0 8.5 z" fill="var(--violet2)" /></marker>' +
+        '  <marker id="arr-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 L8 5 L0 8.5 z" fill="#10B981" /></marker>' +
+        '  <marker id="arr-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 L8 5 L0 8.5 z" fill="#F59E0B" /></marker>' +
+        '</defs>' +
+        '<!-- Connections -->' +
+        '<path d="M 100 120 L 150 120" stroke="var(--cyan)" stroke-dasharray="4" stroke-width="1.5" fill="none" marker-end="url(#arr-cyan)" />' +
+        '<path d="M 270 120 L 380 120" stroke="var(--violet2)" stroke-dasharray="4" stroke-width="1.5" fill="none" marker-end="url(#arr-violet)" />' +
+        '<path d="M 500 120 L 590 120" stroke="#10B981" stroke-dasharray="4" stroke-width="1.5" fill="none" marker-end="url(#arr-green)" />' +
+        '<path d="M 440 140 L 440 185" stroke="#F59E0B" stroke-dasharray="4" stroke-width="1.5" fill="none" marker-end="url(#arr-amber)" />' +
+        '<!-- Nodes -->' +
+        '<g>' +
+        '  <rect x="30" y="100" width="70" height="40" rx="6" fill="rgba(255,255,255,0.03)" stroke="var(--gborder)" stroke-width="1.5" />' +
+        '  <text x="65" y="125" fill="var(--white)" font-size="11" font-family="monospace" text-anchor="middle">👤 User</text>' +
+        '</g>' +
+        '<g>' +
+        '  <rect x="150" y="100" width="120" height="40" rx="6" fill="rgba(0,229,255,0.04)" stroke="var(--cyan)" stroke-width="1.5" />' +
+        '  <text x="210" y="125" fill="var(--cyan)" font-size="11" font-family="monospace" text-anchor="middle" font-weight="bold">Console Menu</text>' +
+        '</g>' +
+        '<g>' +
+        '  <rect x="380" y="100" width="120" height="40" rx="6" fill="rgba(168,85,247,0.04)" stroke="var(--violet2)" stroke-width="1.5" />' +
+        '  <text x="440" y="125" fill="var(--violet2)" font-size="11" font-family="monospace" text-anchor="middle" font-weight="bold">CRUD Engine (C)</text>' +
+        '</g>' +
+        '<g>' +
+        '  <rect x="590" y="100" width="100" height="40" rx="6" fill="rgba(16,185,129,0.04)" stroke="#10B981" stroke-width="1.5" />' +
+        '  <text x="640" y="125" fill="#10B981" font-size="11" font-family="monospace" text-anchor="middle" font-weight="bold">Binary File (.dat)</text>' +
+        '</g>' +
+        '<g>' +
+        '  <rect x="360" y="185" width="160" height="40" rx="6" fill="rgba(245,158,11,0.04)" stroke="#F59E0B" stroke-width="1.5" />' +
+        '  <text x="440" y="210" fill="#F59E0B" font-size="10" font-family="monospace" text-anchor="middle" font-weight="bold">BMI Calculator Svc</text>' +
+        '</g>' +
+        '</svg>'
     }
   };
 
@@ -3019,7 +3272,7 @@ function apiFetch(path, cb, errCb) {
   document.addEventListener('mouseup', function () {
     ring.style.transition = 'width 0.2s, height 0.2s, border-color 0.2s';
     setTimeout(function() {
-      if (document.querySelector('a:hover, button:hover, .proj-card:hover, .sk-card:hover, .soc:hover, .orbit-item:hover, .impact-card:hover, .arch-btn:hover, .arch-modal-close:hover')) {
+      if (document.querySelector('a:hover, button:hover, .proj-card:hover, .sk-card:hover, .soc:hover, .orbit-item:hover, .impact-card:hover, .arch-btn:hover, .arch-modal-close:hover, .proj-action-btn:hover')) {
         ring.style.width = '48px';
         ring.style.height = '48px';
       } else {
@@ -3031,7 +3284,7 @@ function apiFetch(path, cb, errCb) {
   });
 
   // Hover animations
-  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item, .impact-card, .arch-btn, .arch-modal-close').forEach(function (el) {
+  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn').forEach(function (el) {
     el.addEventListener('mouseenter', function () {
       dot.style.width = '12px'; dot.style.height = '12px'; dot.style.background = 'var(--violet2)';
       ring.style.width = '48px'; ring.style.height = '48px'; ring.style.borderColor = 'var(--violet2)';
@@ -3258,14 +3511,14 @@ window.toggleAudioFeedback = function () {
 // Hook up synth event listeners
 (function attachSynthListeners() {
   function applyListeners() {
-    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipeline-node, .sk-pill, .impact-card, .arch-btn, .arch-modal-close').forEach(function (el) {
+    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipeline-node, .sk-pill, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn').forEach(function (el) {
       if (el.dataset.synthBound) return;
       el.dataset.synthBound = "true";
       el.addEventListener('mouseenter', function () {
         SynthSound.hover();
       });
       el.addEventListener('click', function () {
-        if (el.classList.contains('proj-card') || el.classList.contains('impact-card') || el.classList.contains('arch-btn') || el.id === 'term-btn') {
+        if (el.classList.contains('proj-card') || el.classList.contains('impact-card') || el.classList.contains('arch-btn') || el.classList.contains('arch') || el.id === 'term-btn') {
           SynthSound.expand();
         } else if (el.classList.contains('proj-modal-close') || el.classList.contains('arch-modal-close') || el.classList.contains('term-close') || el.id === 'term-close-dots') {
           SynthSound.shrink();
