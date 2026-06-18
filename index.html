@@ -294,11 +294,34 @@ section.visible .wipe-line{transform:scaleX(1);}
 .sk-card:hover{border-color:var(--gborder2);transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,229,255,.09),inset 0 1px 0 rgba(0,229,255,.09);}
 .sk-icon{font-size:1.5rem;margin-bottom:.65rem;}
 .sk-name{font-family:var(--font-d);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:.9rem;}
-.sk-bar-wrap{margin-bottom:.55rem;}
-.sk-bar-label{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted2);margin-bottom:.26rem;}
-.sk-bar-label span:last-child{color:var(--cyan);font-weight:600;}
-.sk-bar-track{height:3px;background:rgba(255,255,255,.05);border-radius:100px;overflow:hidden;}
-.sk-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--cyan),var(--violet2));width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+.sk-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.1rem;
+}
+.sk-pill {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--gborder);
+  color: var(--white);
+  padding: 0.45rem 1rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all var(--t);
+  display: inline-flex;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.sk-pill:hover {
+  background: var(--gborder);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.15);
+}
 
 /* PROJECTS */
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem;}
@@ -1441,39 +1464,31 @@ footer span{color:var(--cyan);}
   <div class="inner">
     <p class="s-label reveal">technical skills</p>
     <h2 class="s-title reveal">Skill <span>Arsenal</span></h2>
-    <div class="skills-grid">
-      <div class="sk-card reveal"><div class="sk-icon">⌨️</div><div class="sk-name">Languages</div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>JavaScript</span><span>85%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="85"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Java</span><span>78%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="78"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Python</span><span>75%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="75"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>C / C++</span><span>70%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="70"></div></div></div>
+      <div class="sk-card reveal"><div class="sk-icon">🥇</div><div class="sk-name">Advanced</div>
+        <div class="sk-pills">
+          <span class="sk-pill">Java</span>
+          <span class="sk-pill">JavaScript</span>
+          <span class="sk-pill">HTML</span>
+          <span class="sk-pill">CSS</span>
+        </div>
       </div>
-      <div class="sk-card reveal"><div class="sk-icon">🖼️</div><div class="sk-name">Frontend</div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>HTML / CSS</span><span>90%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="90"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>React / Next.js</span><span>75%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="75"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Bootstrap</span><span>82%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="82"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Tailwind</span><span>68%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="68"></div></div></div>
+      <div class="sk-card reveal"><div class="sk-icon">🥈</div><div class="sk-name">Intermediate</div>
+        <div class="sk-pills">
+          <span class="sk-pill">React</span>
+          <span class="sk-pill">Next.js</span>
+          <span class="sk-pill">Node.js</span>
+          <span class="sk-pill">MongoDB</span>
+          <span class="sk-pill">Docker</span>
+          <span class="sk-pill">Jenkins</span>
+        </div>
       </div>
-      <div class="sk-card reveal"><div class="sk-icon">⚙️</div><div class="sk-name">Backend</div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Node.js</span><span>80%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="80"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Express.js</span><span>78%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="78"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>FastAPI</span><span>65%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="65"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>REST APIs</span><span>82%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="82"></div></div></div>
-      </div>
-      <div class="sk-card reveal"><div class="sk-icon">🗄️</div><div class="sk-name">Databases</div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>MongoDB</span><span>80%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="80"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>MySQL</span><span>72%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="72"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Mongoose</span><span>76%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="76"></div></div></div>
-      </div>
-      <div class="sk-card reveal"><div class="sk-icon">🚀</div><div class="sk-name">DevOps</div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Docker</span><span>72%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="72"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Jenkins CI/CD</span><span>68%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="68"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Git / GitHub</span><span>88%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="88"></div></div></div>
-      </div>
-      <div class="sk-card reveal"><div class="sk-icon">🧠</div><div class="sk-name">AI / ML</div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>NLP / VADER</span><span>65%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="65"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>Scikit-learn</span><span>60%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="60"></div></div></div>
-        <div class="sk-bar-wrap"><div class="sk-bar-label"><span>TF-IDF / Cosine</span><span>62%</span></div><div class="sk-bar-track"><div class="sk-bar-fill" data-w="62"></div></div></div>
+      <div class="sk-card reveal"><div class="sk-icon">🥉</div><div class="sk-name">Familiar</div>
+        <div class="sk-pills">
+          <span class="sk-pill">Kubernetes</span>
+          <span class="sk-pill">FastAPI</span>
+          <span class="sk-pill">Terraform</span>
+          <span class="sk-pill">AWS</span>
+        </div>
       </div>
     </div>
 
