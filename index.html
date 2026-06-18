@@ -896,7 +896,7 @@ footer span{color:var(--cyan);}
   .ach-card.wide{grid-column:auto;}
   .gh-stats-row{grid-template-columns:repeat(2,1fr);}
   .ls-inner{grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));}
-  .pipeline-svg{min-width:650px;}
+  .pipeline-svg{min-width:900px;}
 
   /* Floating Modal Close button on mobile/tablets */
   .proj-modal-close {
@@ -1219,7 +1219,7 @@ footer span{color:var(--cyan);}
   margin-bottom: 0.5rem;
   font-weight: bold;
 }
-#pipeline-desc-content {
+#devops-desc-content {
   font-size: 0.86rem;
   color: var(--muted2);
   line-height: 1.6;
@@ -1626,6 +1626,7 @@ footer span{color:var(--cyan);}
   <ul class="nav-links" id="navLinks">
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#devops">DevOps</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#github-live">GitHub</a></li>
     <li><a href="#lc-section">LeetCode</a></li>
@@ -1910,68 +1911,134 @@ footer span{color:var(--cyan);}
       </div>
     </div>
 
-    <!-- DEVOPS INTERACTIVE SHOWCASE -->
-    <div class="devops-showcase reveal" style="margin-top: 3.5rem;">
-      <h3 class="s-title" style="font-size: 1.4rem; margin-bottom: 1.8rem; text-align: center;">Interactive <span>Deployment Pipeline</span></h3>
-      <div class="pipeline-container">
-        <!-- SVG Pipeline Diagram Wrapper -->
-        <div class="pipeline-svg-wrapper">
-          <!-- SVG Pipeline Diagram -->
-          <svg viewBox="0 0 800 200" class="pipeline-svg" id="pipeline-svg">
-            <!-- Connection lines -->
-            <path d="M 100 100 L 260 100" class="pipe-line" id="line-1"/>
-            <path d="M 260 100 L 420 100" class="pipe-line" id="line-2"/>
-            <path d="M 420 100 L 580 100" class="pipe-line" id="line-3"/>
-            <path d="M 580 100 L 740 100" class="pipe-line" id="line-4"/>
-            
-            <!-- Animated pulse over lines -->
-            <circle r="4" fill="var(--cyan)" class="pipe-pulse" style="animation-delay: 0s;"><animateMotion dur="4s" repeatCount="indefinite" path="M 100 100 L 740 100"/></circle>
-            <circle r="4" fill="var(--violet2)" class="pipe-pulse" style="animation-delay: 2s;"><animateMotion dur="4s" repeatCount="indefinite" path="M 100 100 L 740 100"/></circle>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <!-- Node 1: Code -->
-            <g class="pipe-node" id="node-code" onclick="showPipelineDetail('code')">
-              <circle cx="100" cy="100" r="32" class="node-bg"/>
-              <text x="100" y="105" class="node-icon">💻</text>
-              <text x="100" y="152" class="node-label">1. Write Code</text>
-            </g>
+<!-- DEVOPS & DEPLOYMENT EXPERIENCE -->
+<section id="devops" class="section reveal">
+  <div class="container">
+    <h2 class="s-title" style="text-align: center; margin-bottom: 1.5rem;">DevOps & <span>Deployment Experience</span></h2>
+    
+    <p class="s-desc" style="text-align: center; max-width: 650px; margin: 0 auto 2.8rem; font-size: 0.95rem; color: var(--muted2); line-height: 1.6;">
+      Building, containerizing, automating, deploying, and monitoring scalable full-stack applications with state-of-the-art infrastructure orchestration.
+    </p>
 
-            <!-- Node 2: Version Control -->
-            <g class="pipe-node" id="node-git" onclick="showPipelineDetail('git')">
-              <circle cx="260" cy="100" r="32" class="node-bg"/>
-              <text x="260" y="105" class="node-icon">🐙</text>
-              <text x="260" y="152" class="node-label">2. Git Push</text>
-            </g>
-
-            <!-- Node 3: CI/CD -->
-            <g class="pipe-node" id="node-cicd" onclick="showPipelineDetail('cicd')">
-              <circle cx="420" cy="100" r="32" class="node-bg"/>
-              <text x="420" y="105" class="node-icon">🤖</text>
-              <text x="420" y="152" class="node-label">3. CI/CD Build</text>
-            </g>
-
-            <!-- Node 4: Containerize -->
-            <g class="pipe-node" id="node-docker" onclick="showPipelineDetail('docker')">
-              <circle cx="580" cy="100" r="32" class="node-bg"/>
-              <text x="580" y="105" class="node-icon">🐋</text>
-              <text x="580" y="152" class="node-label">4. Dockerize</text>
-            </g>
-
-            <!-- Node 5: Deploy -->
-            <g class="pipe-node" id="node-deploy" onclick="showPipelineDetail('deploy')">
-              <circle cx="740" cy="100" r="32" class="node-bg"/>
-              <text x="740" y="105" class="node-icon">🌐</text>
-              <text x="740" y="152" class="node-label">5. Live Deploy</text>
-            </g>
+    <!-- Technologies Grid -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 3.5rem;">
+      <div class="sk-pills" style="justify-content: center; max-width: 800px; gap: 12px 14px;">
+        <span class="sk-pill devops-pill" style="--brand-color: #2496ED; --hover-bg: rgba(36, 150, 237, 0.08); --hover-shadow: rgba(36, 150, 237, 0.15);">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M2 10.5h2v2H2v-2zm3 0h2v2H5v-2zm3 0h2v2H8v-2zm3 0h2v2h-2v-2zm-6-3h2v2H5V7.5zm3 0h2v2H8V7.5zm3 0h2v2h-2V7.5zm3 0h2v2h-2V7.5zm-3-3h2v2h-2V4.5zm6 9.5c-1.5 2-4.5 3-7.5 3H3.5C2 17 1 16 1 14.5c0-2 1.5-3.5 3.5-3.5H19c.8 0 1.5.5 1.5 1.2 0 1.5-1.5 2.5-2.8 2.3z"/></svg>
+          Docker
+        </span>
+        <span class="sk-pill devops-pill" style="--brand-color: #D24939; --hover-bg: rgba(210, 73, 57, 0.08); --hover-shadow: rgba(210, 73, 57, 0.15);">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 00-6.88 17.24l.56-.56a9.2 9.2 0 1112.64 0l.56.56A10 10 0 0012 2zm0 3a7 7 0 00-4.9 11.9l.56-.56A6.2 6.2 0 1116.34 16.34l.56.56A7 7 0 0012 5z"/></svg>
+          Jenkins
+        </span>
+        <span class="sk-pill devops-pill" style="--brand-color: #2088FF; --hover-bg: rgba(32, 136, 255, 0.08); --hover-shadow: rgba(32, 136, 255, 0.15);">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          GitHub Actions
+        </span>
+        <span class="sk-pill devops-pill" style="--brand-color: #326CE5; --hover-bg: rgba(50, 108, 229, 0.08); --hover-shadow: rgba(50, 108, 229, 0.15);">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12.002 2L4.004 5.3l1.528 8.956 6.47 5.744 6.47-5.744 1.528-8.956L12.002 2zm0 3.25l4.582 2.333-1.077 6.31-3.505 3.11-3.505-3.11-1.077-6.31 4.582-2.333z"/></svg>
+          Kubernetes
+        </span>
+        <span class="sk-pill devops-pill" style="--brand-color: #E6522C; --hover-bg: rgba(230, 82, 44, 0.08); --hover-shadow: rgba(230, 82, 44, 0.15);">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none" />
+            <path d="M12 5c-2.5 3-4.5 5.5-4.5 8.5 0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5C16.5 10.5 14.5 8 12 5zm-1.5 9.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0z" fill="currentColor"/>
           </svg>
-        </div>
+          Prometheus
+        </span>
+        <span class="sk-pill devops-pill" style="--brand-color: #F47A20; --hover-bg: rgba(244, 122, 32, 0.08); --hover-shadow: rgba(244, 122, 32, 0.15);">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-5h2v5zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+          Grafana
+        </span>
+        <span class="sk-pill devops-pill" style="--brand-color: #0F1689; --hover-bg: rgba(15, 22, 137, 0.08); --hover-shadow: rgba(15, 22, 137, 0.15);">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.5" fill="none" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+          Helm
+        </span>
+      </div>
+    </div>
 
-        <!-- Pipeline details panel -->
-        <div class="pipeline-desc-panel" id="pipeline-desc-panel">
-          <div class="desc-panel-header">
-            <span id="pipeline-desc-title">Click a node to inspect pipeline step</span>
-          </div>
-          <p id="pipeline-desc-content">Learn how Esha's code changes are automatically tested, containerized, and deployed to live production servers.</p>
+    <!-- Animated Pipeline Showcase -->
+    <div class="pipeline-container">
+      <h3 class="s-title" style="font-size: 1.25rem; margin-bottom: 2rem; text-align: center; letter-spacing: 0.05em;">Interactive <span>Deployment Pipeline Flow</span></h3>
+      <div class="pipeline-svg-wrapper">
+        <svg viewBox="0 0 1000 200" class="pipeline-svg" id="devops-pipeline-svg">
+          <!-- Connection lines -->
+          <path d="M 70 90 L 210 90" class="pipe-line" id="devops-line-1"/>
+          <path d="M 210 90 L 350 90" class="pipe-line" id="devops-line-2"/>
+          <path d="M 350 90 L 490 90" class="pipe-line" id="devops-line-3"/>
+          <path d="M 490 90 L 630 90" class="pipe-line" id="devops-line-4"/>
+          <path d="M 630 90 L 770 90" class="pipe-line" id="devops-line-5"/>
+          <path d="M 770 90 L 910 90" class="pipe-line" id="devops-line-6"/>
+          
+          <!-- Animated pulse over lines -->
+          <circle r="4" fill="var(--cyan)" class="pipe-pulse" style="animation-delay: 0s;"><animateMotion dur="6s" repeatCount="indefinite" path="M 70 90 L 910 90"/></circle>
+          <circle r="4" fill="var(--violet2)" class="pipe-pulse" style="animation-delay: 3s;"><animateMotion dur="6s" repeatCount="indefinite" path="M 70 90 L 910 90"/></circle>
+
+          <!-- Node 1: Code -->
+          <g class="pipe-node devops-node active" id="node-devops-code" onclick="showDevOpsDetail('code')">
+            <circle cx="70" cy="90" r="30" class="node-bg"/>
+            <text x="70" y="95" class="node-icon">💻</text>
+            <text x="70" y="142" class="node-label">1. Code</text>
+          </g>
+
+          <!-- Node 2: GitHub -->
+          <g class="pipe-node devops-node" id="node-devops-github" onclick="showDevOpsDetail('github')">
+            <circle cx="210" cy="90" r="30" class="node-bg"/>
+            <text x="210" y="95" class="node-icon">🐱</text>
+            <text x="210" y="142" class="node-label">2. GitHub</text>
+          </g>
+
+          <!-- Node 3: Jenkins -->
+          <g class="pipe-node devops-node" id="node-devops-jenkins" onclick="showDevOpsDetail('jenkins')">
+            <circle cx="350" cy="90" r="30" class="node-bg"/>
+            <text x="350" y="95" class="node-icon">🤖</text>
+            <text x="350" y="142" class="node-label">3. Jenkins</text>
+          </g>
+
+          <!-- Node 4: Docker Build -->
+          <g class="pipe-node devops-node" id="node-devops-docker" onclick="showDevOpsDetail('docker')">
+            <circle cx="490" cy="90" r="30" class="node-bg"/>
+            <text x="490" y="95" class="node-icon">🐳</text>
+            <text x="490" y="142" class="node-label">4. Docker Build</text>
+          </g>
+
+          <!-- Node 5: Container Registry -->
+          <g class="pipe-node devops-node" id="node-devops-registry" onclick="showDevOpsDetail('registry')">
+            <circle cx="630" cy="90" r="30" class="node-bg"/>
+            <text x="630" y="95" class="node-icon">📦</text>
+            <text x="630" y="142" class="node-label">5. Registry</text>
+          </g>
+
+          <!-- Node 6: Kubernetes Deployment -->
+          <g class="pipe-node devops-node" id="node-devops-k8s" onclick="showDevOpsDetail('k8s')">
+            <circle cx="770" cy="90" r="30" class="node-bg"/>
+            <text x="770" y="95" class="node-icon">☸️</text>
+            <text x="770" y="142" class="node-label">6. K8s Deploy</text>
+          </g>
+
+          <!-- Node 7: Monitoring -->
+          <g class="pipe-node devops-node" id="node-devops-monitoring" onclick="showDevOpsDetail('monitoring')">
+            <circle cx="910" cy="90" r="30" class="node-bg"/>
+            <text x="910" y="95" class="node-icon">📊</text>
+            <text x="910" y="142" class="node-label">7. Monitoring</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Pipeline details panel -->
+      <div class="pipeline-desc-panel" id="devops-desc-panel" style="margin-top: 2rem;">
+        <div class="desc-panel-header">
+          <span id="devops-desc-title">Step 1: Code (Development Workflow)</span>
         </div>
+        <p id="devops-desc-content">Clean development with object-oriented standards in Java, functional paradigms in JavaScript/TypeScript, and microservice definitions in Python.</p>
       </div>
     </div>
   </div>
@@ -2762,43 +2829,73 @@ function apiFetch(path, cb, errCb) {
 
 /* ─── DEVOPS PIPELINE ────────────────────────────────────────────────────── */
 (function () {
-  window.showPipelineDetail = function (step) {
-    var title = $('pipeline-desc-title');
-    var desc = $('pipeline-desc-content');
-    var panel = $('pipeline-desc-panel');
+  window.showDevOpsDetail = function (step) {
+    var title = $('devops-desc-title');
+    var desc = $('devops-desc-content');
+    var panel = $('devops-desc-panel');
     if (!title || !desc || !panel) return;
 
     panel.classList.add('active');
 
     // Deactivate all nodes
-    document.querySelectorAll('.pipe-node').forEach(function (node) {
+    document.querySelectorAll('.devops-node').forEach(function (node) {
       node.classList.remove('active');
     });
 
     // Activate chosen node
-    var activeNode = $('node-' + step);
+    var activeNode = $('node-devops-' + step);
     if (activeNode) activeNode.classList.add('active');
+
+    // Highlight preceding connection lines
+    var stepIndexMap = {
+      code: 0,
+      github: 1,
+      jenkins: 2,
+      docker: 3,
+      registry: 4,
+      k8s: 5,
+      monitoring: 6
+    };
+    var activeIdx = stepIndexMap[step] || 0;
+    for (var i = 1; i <= 6; i++) {
+      var line = $('devops-line-' + i);
+      if (line) {
+        if (i <= activeIdx) {
+          line.classList.add('active');
+        } else {
+          line.classList.remove('active');
+        }
+      }
+    }
 
     var info = {
       code: {
-        title: "Step 1: Write Code (Local Dev)",
-        desc: "Code is authored in VS Code utilizing strict static typing in TypeScript, or OOP paradigms in Java. Code linting and local unit tests are automatically executed before commit."
+        title: "Step 1: Code (Local Development)",
+        desc: "Clean development utilizing strictly typed TypeScript/JavaScript and object-oriented Java/C++. Local unit tests, linting tools, and pre-commit hooks ensure high code quality standards before commits."
       },
-      git: {
-        title: "Step 2: Version Control (Git Push)",
-        desc: "Changes are pushed to GitHub. Git branch policies prevent direct commits to master. Pushes immediately trigger a webhook notifying the GitHub Actions environment."
+      github: {
+        title: "Step 2: GitHub (Version Control)",
+        desc: "Code repository hosted on GitHub with production branch protection policies. Merges are done via peer-reviewed pull requests, which trigger automated GitHub Actions build checks and webhooks."
       },
-      cicd: {
-        title: "Step 3: CI/CD Build Pipeline",
-        desc: "GitHub Actions runner spins up, checks out the codebase, executes security audits, installs packages, runs unit and integration tests, and compiles the production bundle."
+      jenkins: {
+        title: "Step 3: Jenkins (CI/CD Automation)",
+        desc: "An automated Jenkins automation server receives webhook triggers to coordinate testing pipelines, package security audits, test suites, and orchestrate build triggers with absolute stability."
       },
       docker: {
-        title: "Step 4: Containerization (Docker)",
-        desc: "Once testing passes, the application is packaged into a lightweight, isolated Docker container using multi-stage builds. The production image is tagged and pushed to a secure registry."
+        title: "Step 4: Docker Build (Containerization)",
+        desc: "App components are compiled and packaged into lightweight, secure Docker container images using multi-stage builds. Containerization guarantees runtime parity across developer machines, staging, and production servers."
       },
-      deploy: {
-        title: "Step 5: Live Deployment",
-        desc: "The container is pulled onto the host server (VPS or Cloud) using Docker Compose. A reverse proxy (Nginx) dynamically binds SSL certificates and routes traffic to the container with zero downtime."
+      registry: {
+        title: "Step 5: Container Registry (Image Management)",
+        desc: "Completed Docker images are securely versioned, tagged, and uploaded to a Container Registry (such as Docker Hub or AWS ECR), ready to be pulled by host orchestrators."
+      },
+      k8s: {
+        title: "Step 6: Kubernetes Deployment (Orchestration)",
+        desc: "Images are pulled and managed inside a Kubernetes cluster. Helm charts define deployment configurations, service routing, and ingress limits, scaling resources dynamically and performing zero-downtime rolling updates."
+      },
+      monitoring: {
+        title: "Step 7: Monitoring (Prometheus & Grafana)",
+        desc: "Deployed microservices are instrumented with Prometheus to scrap metrics (endpoints hit, error rates, CPU load). Grafana aggregates these metrics into live visualizations and instant alert triggers."
       }
     };
 
@@ -3272,7 +3369,7 @@ function apiFetch(path, cb, errCb) {
   document.addEventListener('mouseup', function () {
     ring.style.transition = 'width 0.2s, height 0.2s, border-color 0.2s';
     setTimeout(function() {
-      if (document.querySelector('a:hover, button:hover, .proj-card:hover, .sk-card:hover, .soc:hover, .orbit-item:hover, .impact-card:hover, .arch-btn:hover, .arch-modal-close:hover, .proj-action-btn:hover')) {
+      if (document.querySelector('a:hover, button:hover, .proj-card:hover, .sk-card:hover, .soc:hover, .orbit-item:hover, .impact-card:hover, .arch-btn:hover, .arch-modal-close:hover, .proj-action-btn:hover, .pipe-node:hover, .devops-pill:hover')) {
         ring.style.width = '48px';
         ring.style.height = '48px';
       } else {
@@ -3284,7 +3381,7 @@ function apiFetch(path, cb, errCb) {
   });
 
   // Hover animations
-  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn').forEach(function (el) {
+  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .pipe-node, .devops-pill').forEach(function (el) {
     el.addEventListener('mouseenter', function () {
       dot.style.width = '12px'; dot.style.height = '12px'; dot.style.background = 'var(--violet2)';
       ring.style.width = '48px'; ring.style.height = '48px'; ring.style.borderColor = 'var(--violet2)';
@@ -3511,7 +3608,7 @@ window.toggleAudioFeedback = function () {
 // Hook up synth event listeners
 (function attachSynthListeners() {
   function applyListeners() {
-    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipeline-node, .sk-pill, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn').forEach(function (el) {
+    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipe-node, .sk-pill, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .devops-pill').forEach(function (el) {
       if (el.dataset.synthBound) return;
       el.dataset.synthBound = "true";
       el.addEventListener('mouseenter', function () {
@@ -3588,6 +3685,7 @@ window.toggleAudioFeedback = function () {
     $('hero'),
     $('experience'),
     $('skills'),
+    $('devops'),
     $('projects'),
     $('github-live'),
     $('lc-section'),
