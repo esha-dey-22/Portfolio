@@ -391,7 +391,119 @@ section.visible .wipe-line{transform:scaleX(1);}
 .tech-chip{padding:.16rem .52rem;border-radius:4px;font-size:.67rem;font-weight:500;background:rgba(123,47,190,.12);border:1px solid rgba(123,47,190,.24);color:#C084FC;}
 .proj-links{display:flex;gap:.9rem;}
 .proj-link{display:inline-flex;align-items:center;gap:.32rem;font-size:.74rem;font-weight:600;color:var(--cyan);border-bottom:1px solid transparent;transition:border-color var(--t);padding-bottom:1px;}
-.proj-link:hover{border-color:var(--cyan);}
+
+/* TECHNICAL IMPACT SECTION */
+#tech-impact {
+  background: rgba(8, 12, 24, 0.22);
+}
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin-top: 2rem;
+}
+@media (max-width: 1024px) {
+  .impact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.impact-card {
+  background: var(--glass);
+  border: 1px solid var(--gborder);
+  border-radius: var(--r);
+  padding: 1.6rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--t), box-shadow var(--t), transform var(--t);
+}
+.impact-card:hover {
+  border-color: rgba(0, 229, 255, 0.24);
+  box-shadow: 0 12px 40px rgba(0, 229, 255, 0.08);
+  transform: translateY(-4px);
+}
+.impact-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.impact-card:hover .impact-bar {
+  transform: scaleX(1);
+}
+.impact-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px dashed var(--gborder);
+  padding-bottom: 0.8rem;
+}
+.impact-proj-icon {
+  font-size: 1.2rem;
+}
+.impact-proj-title {
+  font-family: var(--font-d);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.impact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.impact-item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.impact-meta-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cyan);
+}
+.impact-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+}
+.impact-icon.problem {
+  fill: #EF4444; /* red tint for problems */
+}
+.impact-icon.solution {
+  fill: #3B82F6; /* blue tint for solution */
+}
+.impact-icon.tech {
+  stroke: #A855F7; /* purple tint for tech */
+}
+.impact-icon.impact-stat {
+  fill: #10B981; /* green tint for impact */
+}
+.impact-text {
+  font-size: 0.78rem;
+  color: var(--muted2);
+  line-height: 1.5;
+  margin: 0 0 0 1.4rem; /* Indented under the icon/label alignment */
+}
 
 /* GITHUB LIVE */
 #github-live{background:rgba(10,16,32,.3);}
@@ -1350,7 +1462,7 @@ footer span{color:var(--cyan);}
   stroke-dashoffset: 1000;
   transition: stroke-dashoffset 0.85s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.sk-card:hover .border-tracer rect, .proj-card:hover .border-tracer rect {
+.sk-card:hover .border-tracer rect, .proj-card:hover .border-tracer rect, .impact-card:hover .border-tracer rect {
   stroke-dashoffset: 0;
 }
 </style>
@@ -1771,6 +1883,211 @@ footer span{color:var(--cyan);}
         <div class="proj-tech"><span class="tech-chip">C Language</span><span class="tech-chip">Data Management</span><span class="tech-chip">File I/O</span></div>
         <div class="proj-links" onclick="event.stopPropagation()"><a href="https://github.com/esha-dey-22" target="_blank" rel="noopener" class="proj-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.57 0-.28-.01-1.02-.01-2-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a></div>
       </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNICAL IMPACT -->
+<section id="tech-impact">
+  <div class="wipe-line"></div>
+  <div class="inner">
+    <p class="s-label reveal">Recruiter Quick-View</p>
+    <h2 class="s-title reveal">Technical <span>Impact</span></h2>
+    <div class="impact-grid">
+      <!-- CivicConnect -->
+      <div class="impact-card reveal">
+        <div class="impact-bar"></div>
+        <div class="impact-header">
+          <span class="impact-proj-icon">🗳️</span>
+          <h3 class="impact-proj-title">CivicConnect</h3>
+        </div>
+        <ul class="impact-list">
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon problem" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <span class="impact-meta-label">Problem Solved</span>
+            </div>
+            <p class="impact-text">Citizen complaint fatigue and slow manual triage of duplicate reports.</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon solution" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.65 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.65-.8 3.16-2.15 4.1z"/></svg>
+              <span class="impact-meta-label">Technical Solution</span>
+            </div>
+            <p class="impact-text">Implemented duplicate report detection using NLP similarity matching (TF-IDF & Cosine Similarity).</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon tech" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span class="impact-meta-label">Key Technologies</span>
+            </div>
+            <p class="impact-text">Next.js 15, FastAPI, MongoDB, Clerk Auth, Python</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon impact-stat" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6.18-6.18 4 4L20 9.41 22.29 11.7 23 6z"/></svg>
+              <span class="impact-meta-label">Impact</span>
+            </div>
+            <p class="impact-text">Automated citizen notification workflows and streamlined city administration triage.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Online Market for Local Vendors -->
+      <div class="impact-card reveal">
+        <div class="impact-bar"></div>
+        <div class="impact-header">
+          <span class="impact-proj-icon">🏪</span>
+          <h3 class="impact-proj-title">Local Market Platform</h3>
+        </div>
+        <ul class="impact-list">
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon problem" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <span class="impact-meta-label">Problem Solved</span>
+            </div>
+            <p class="impact-text">Zero web presence and marketing accessibility for localized neighborhood vendors.</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon solution" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.65 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.65-.8 3.16-2.15 4.1z"/></svg>
+              <span class="impact-meta-label">Technical Solution</span>
+            </div>
+            <p class="impact-text">Designed local shop landing profiles with MongoDB indexing and optimized product catalogs.</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon tech" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span class="impact-meta-label">Key Technologies</span>
+            </div>
+            <p class="impact-text">Node.js, Express.js, MongoDB, Docker, Jenkins</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon impact-stat" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6.18-6.18 4 4L20 9.41 22.29 11.7 23 6z"/></svg>
+              <span class="impact-meta-label">Impact</span>
+            </div>
+            <p class="impact-text">Streamlined CI/CD deployment cycles via automated Jenkins pipelines.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- StreamFlare -->
+      <div class="impact-card reveal">
+        <div class="impact-bar"></div>
+        <div class="impact-header">
+          <span class="impact-proj-icon">🎬</span>
+          <h3 class="impact-proj-title">StreamFlare</h3>
+        </div>
+        <ul class="impact-list">
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon problem" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <span class="impact-meta-label">Problem Solved</span>
+            </div>
+            <p class="impact-text">Unoptimized cross-device media delivery layouts and slow streaming page setups.</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon solution" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.65 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.65-.8 3.16-2.15 4.1z"/></svg>
+              <span class="impact-meta-label">Technical Solution</span>
+            </div>
+            <p class="impact-text">Developed a highly fluid and modular dashboard utilizing Bootstrap-based UI architecture.</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon tech" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span class="impact-meta-label">Key Technologies</span>
+            </div>
+            <p class="impact-text">HTML, CSS, JavaScript, Bootstrap, Docker Hub, Jenkins</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon impact-stat" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6.18-6.18 4 4L20 9.41 22.29 11.7 23 6z"/></svg>
+              <span class="impact-meta-label">Impact</span>
+            </div>
+            <p class="impact-text">Dockerized build workflow ensuring consistent rendering behavior on multiple device targets.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Marks Update Tracker -->
+      <div class="impact-card reveal">
+        <div class="impact-bar"></div>
+        <div class="impact-header">
+          <span class="impact-proj-icon">📈</span>
+          <h3 class="impact-proj-title">Marks Update Tracker</h3>
+        </div>
+        <ul class="impact-list">
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon problem" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <span class="impact-meta-label">Problem Solved</span>
+            </div>
+            <p class="impact-text">High-latency calculations of student academic ranks post exam re-evaluations.</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon solution" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.65 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.65-.8 3.16-2.15 4.1z"/></svg>
+              <span class="impact-meta-label">Technical Solution</span>
+            </div>
+            <p class="impact-text">Designed custom hash maps and lookup arrays to track score fluctuations and ranks.</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon tech" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span class="impact-meta-label">Key Technologies</span>
+            </div>
+            <p class="impact-text">Python, Data Structures, Algorithmic Analysis</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon impact-stat" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6.18-6.18 4 4L20 9.41 22.29 11.7 23 6z"/></svg>
+              <span class="impact-meta-label">Impact</span>
+            </div>
+            <p class="impact-text">Optimized rank updating algorithms, ensuring instantaneous lookup for faculty analytics.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Fitness Club System -->
+      <div class="impact-card reveal">
+        <div class="impact-bar"></div>
+        <div class="impact-header">
+          <span class="impact-proj-icon">💪</span>
+          <h3 class="impact-proj-title">Fitness Club System</h3>
+        </div>
+        <ul class="impact-list">
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon problem" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <span class="impact-meta-label">Problem Solved</span>
+            </div>
+            <p class="impact-text">Fragile paper logs and slow retrieval of physical customer health/package reports.</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon solution" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.65 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.65-.8 3.16-2.15 4.1z"/></svg>
+              <span class="impact-meta-label">Technical Solution</span>
+            </div>
+            <p class="impact-text">Built structured binary search algorithms and indexed disk-bound database files.</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon tech" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span class="impact-meta-label">Key Technologies</span>
+            </div>
+            <p class="impact-text">C Language, File I/O, Struct Pointer Mappings</p>
+          </li>
+          <li>
+            <div class="impact-item-header">
+              <svg class="impact-icon impact-stat" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6.18-6.18 4 4L20 9.41 22.29 11.7 23 6z"/></svg>
+              <span class="impact-meta-label">Impact</span>
+            </div>
+            <p class="impact-text">Automated BMI assessment calculations and secured local multi-member indexes offline.</p>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -2444,7 +2761,7 @@ function apiFetch(path, cb, errCb) {
   document.addEventListener('mouseup', function () {
     ring.style.transition = 'width 0.2s, height 0.2s, border-color 0.2s';
     setTimeout(function() {
-      if (document.querySelector('a:hover, button:hover, .proj-card:hover, .sk-card:hover, .soc:hover, .orbit-item:hover')) {
+      if (document.querySelector('a:hover, button:hover, .proj-card:hover, .sk-card:hover, .soc:hover, .orbit-item:hover, .impact-card:hover')) {
         ring.style.width = '48px';
         ring.style.height = '48px';
       } else {
@@ -2456,7 +2773,7 @@ function apiFetch(path, cb, errCb) {
   });
 
   // Hover animations
-  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item').forEach(function (el) {
+  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item, .impact-card').forEach(function (el) {
     el.addEventListener('mouseenter', function () {
       dot.style.width = '12px'; dot.style.height = '12px'; dot.style.background = 'var(--violet2)';
       ring.style.width = '48px'; ring.style.height = '48px'; ring.style.borderColor = 'var(--violet2)';
@@ -2683,14 +3000,14 @@ window.toggleAudioFeedback = function () {
 // Hook up synth event listeners
 (function attachSynthListeners() {
   function applyListeners() {
-    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipeline-node, .sk-pill').forEach(function (el) {
+    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipeline-node, .sk-pill, .impact-card').forEach(function (el) {
       if (el.dataset.synthBound) return;
       el.dataset.synthBound = "true";
       el.addEventListener('mouseenter', function () {
         SynthSound.hover();
       });
       el.addEventListener('click', function () {
-        if (el.classList.contains('proj-card') || el.id === 'term-btn') {
+        if (el.classList.contains('proj-card') || el.classList.contains('impact-card') || el.id === 'term-btn') {
           SynthSound.expand();
         } else if (el.classList.contains('proj-modal-close') || el.classList.contains('term-close') || el.id === 'term-close-dots') {
           SynthSound.shrink();
@@ -2717,7 +3034,7 @@ window.toggleAudioFeedback = function () {
     '  <rect x="0" y="0" width="100%" height="100%" rx="14" ry="14" fill="none" stroke-width="2" />' +
     '</svg>';
 
-  document.querySelectorAll('.sk-card, .proj-card').forEach(function (card) {
+  document.querySelectorAll('.sk-card, .proj-card, .impact-card').forEach(function (card) {
     card.style.position = 'relative';
     var wrapper = document.createElement('div');
     wrapper.innerHTML = tracerHTML.trim();
