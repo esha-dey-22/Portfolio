@@ -288,40 +288,76 @@ section.visible .wipe-line{transform:scaleX(1);}
 .exp-points li::before{content:'▶';color:var(--cyan);font-size:.48rem;margin-top:.45rem;flex-shrink:0;}
 
 /* SKILLS */
-#skills{background:rgba(10,16,32,.5);}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;}
-.sk-card{background:var(--glass);border:1px solid var(--gborder);border-radius:var(--r);padding:1.5rem;backdrop-filter:blur(12px);transition:border-color var(--t),transform var(--t),box-shadow var(--t);transform-style:preserve-3d;will-change:transform;}
-.sk-card:hover{border-color:var(--gborder2);transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,229,255,.09),inset 0 1px 0 rgba(0,229,255,.09);}
-.sk-icon{font-size:1.5rem;margin-bottom:.65rem;}
-.sk-name{font-family:var(--font-d);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:.9rem;}
+#skills{background:rgba(10,16,32,.5);position:relative;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem;}
+.sk-card{background:var(--glass);border:1px solid var(--gborder);border-radius:var(--r);padding:1.8rem;backdrop-filter:blur(12px);transition:border-color var(--t),transform var(--t),box-shadow var(--t);transform-style:preserve-3d;will-change:transform;}
+.sk-card:hover{border-color:var(--gborder2);transform:translateY(-5px);box-shadow:var(--tier-glow, 0 12px 36px rgba(0,229,255,.09)),inset 0 1px 0 rgba(255,255,255,.05);}
+.sk-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;}
+.sk-card-title-group{display:flex;align-items:center;gap:0.75rem;}
+.sk-card-icon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.03);border:1px solid var(--gborder);font-size:1.1rem;}
+.sk-card-title{font-family:var(--font-d);font-size:1.05rem;font-weight:600;letter-spacing:0.04em;color:var(--white);}
+.sk-card-count{font-size:0.72rem;font-family:var(--font-d);color:var(--muted2);border:1px solid var(--gborder);padding:0.25rem 0.6rem;border-radius:100px;background:rgba(255,255,255,0.02);letter-spacing:0.04em;}
+.sk-card-desc{font-size:0.83rem;color:var(--muted);line-height:1.55;margin-bottom:1.1rem;font-family:var(--font-b);}
+.sk-divider{height:1px;background:linear-gradient(90deg,var(--gborder),transparent);margin-bottom:1.2rem;}
 .sk-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
-  margin-top: 1.1rem;
 }
 .sk-pill {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--gborder);
   color: var(--white);
-  padding: 0.45rem 1rem;
+  padding: 0.45rem 0.95rem;
   border-radius: 100px;
   font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   transition: all var(--t);
   display: inline-flex;
   align-items: center;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+.sk-pill svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
+  display: block;
+}
+.sk-pill svg path,
+.sk-pill svg circle,
+.sk-pill svg ellipse,
+.sk-pill svg rect,
+.sk-pill svg polygon {
+  fill: var(--muted2);
+  transition: fill var(--t), stroke var(--t);
+}
+.sk-pill svg stroke {
+  stroke: var(--muted2);
+  transition: stroke var(--t);
 }
 .sk-pill:hover {
-  background: var(--gborder);
-  border-color: var(--cyan);
-  color: var(--cyan);
+  background: var(--hover-bg, rgba(255, 255, 255, 0.08));
+  border-color: var(--brand-color, var(--cyan));
+  color: var(--brand-color, var(--white));
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.15);
+  box-shadow: 0 4px 15px var(--hover-shadow, rgba(0, 229, 255, 0.15));
 }
+.sk-pill:hover svg path,
+.sk-pill:hover svg circle,
+.sk-pill:hover svg ellipse,
+.sk-pill:hover svg rect,
+.sk-pill:hover svg polygon {
+  fill: var(--brand-color, var(--cyan));
+}
+.sk-pill:hover svg .brand-path-java-blue { fill: #0074BD !important; }
+.sk-pill:hover svg .brand-path-java-red { fill: #EA2D2E !important; }
+.sk-pill:hover svg ellipse {
+  stroke: var(--brand-color, var(--cyan)) !important;
+}
+
 
 /* PROJECTS */
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem;}
@@ -1464,30 +1500,137 @@ footer span{color:var(--cyan);}
   <div class="inner">
     <p class="s-label reveal">technical skills</p>
     <h2 class="s-title reveal">Skill <span>Arsenal</span></h2>
-      <div class="sk-card reveal"><div class="sk-icon">🥇</div><div class="sk-name">Advanced</div>
+    <div class="skills-grid">
+      <!-- Advanced -->
+      <div class="sk-card reveal" style="--tier-glow: 0 12px 36px rgba(255,215,0,0.08);">
+        <div class="sk-card-header">
+          <div class="sk-card-title-group">
+            <span class="sk-card-icon" style="background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.2);">🥇</span>
+            <h3 class="sk-card-title">Advanced</h3>
+          </div>
+          <span class="sk-card-count">4 Skills</span>
+        </div>
+        <p class="sk-card-desc">Core programming languages and web fundamentals with deep architectural and design understanding.</p>
+        <div class="sk-divider"></div>
         <div class="sk-pills">
-          <span class="sk-pill">Java</span>
-          <span class="sk-pill">JavaScript</span>
-          <span class="sk-pill">HTML</span>
-          <span class="sk-pill">CSS</span>
+          <span class="sk-pill" style="--brand-color: #f89820; --hover-bg: rgba(248, 152, 32, 0.08); --hover-shadow: rgba(248, 152, 32, 0.15);">
+            <svg viewBox="0 0 128 128">
+              <path class="brand-path-java-blue" d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z"/>
+              <path class="brand-path-java-red" d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z"/>
+              <path class="brand-path-java-blue" d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z"/>
+              <path class="brand-path-java-red" d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z"/>
+              <path class="brand-path-java-blue" d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z"/>
+            </svg>
+            Java
+          </span>
+          <span class="sk-pill" style="--brand-color: #F7DF1E; --hover-bg: rgba(247, 223, 30, 0.08); --hover-shadow: rgba(247, 223, 30, 0.15);">
+            <svg viewBox="0 0 128 128">
+              <path class="brand-path-js" d="M66.119 107.513c-1.845 3.749-5.367 6.212-9.448 7.401-6.271 1.44-12.269.619-16.731-2.059-2.986-1.832-5.318-4.652-6.901-7.901l9.52-5.83c.083.035.333.487.667 1.071 1.214 2.034 2.261 3.474 4.319 4.485 2.022.69 6.461 1.131 8.175-2.427 1.047-1.81.714-7.628.714-14.065C58.433 78.073 58.48 68 58.48 58h11.709c0 11 .06 21.418 0 32.152.025 6.58.596 12.446-2.07 17.361zm48.574-3.308c-4.07 13.922-26.762 14.374-35.83 5.176-1.916-2.165-3.117-3.296-4.26-5.795 4.819-2.772 4.819-2.772 9.508-5.485 2.547 3.915 4.902 6.068 9.139 6.949 5.748.702 11.531-1.273 10.234-7.378-1.333-4.986-11.77-6.199-18.873-11.531-7.211-4.843-8.901-16.611-2.975-23.335 1.975-2.487 5.343-4.343 8.877-5.235l3.688-.477c7.081-.143 11.507 1.727 14.756 5.355.904.916 1.642 1.904 3.022 4.045-3.772 2.404-3.76 2.381-9.163 5.879-1.154-2.486-3.069-4.046-5.093-4.724-3.142-.952-7.104.083-7.926 3.403-.285 1.023-.226 1.975.227 3.665 1.273 2.903 5.545 4.165 9.377 5.926 11.031 4.474 14.756 9.271 15.672 14.981.882 4.916-.213 8.105-.38 8.581z"/>
+            </svg>
+            JavaScript
+          </span>
+          <span class="sk-pill" style="--brand-color: #E34F26; --hover-bg: rgba(227, 79, 38, 0.08); --hover-shadow: rgba(227, 79, 38, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-html" d="M2 3h20l-1.8 17.5-8.2 2.5-8.2-2.5L2 3zm13.6 5.8l-.2-2.3H6.8l.5 5.2h6.1l-.3 3-3.1.9-3.1-.9-.2-2H4.7l.4 3.9 6.9 2 6.9-2 .8-8.6H9.1l-.1-1.4h6.6z"/>
+            </svg>
+            HTML
+          </span>
+          <span class="sk-pill" style="--brand-color: #1572B6; --hover-bg: rgba(21, 114, 182, 0.08); --hover-shadow: rgba(21, 114, 182, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-css" d="M2 3h20l-1.8 17.5-8.2 2.5-8.2-2.5L2 3zm14 5.3H9.3l-.2-1.8h7.2l.2-2H6.9l.6 5.8h6.1l-.3 3-3.3.9-3.3-.9-.2-2H4.8l.4 3.9 6.8 2 6.8-2 .9-8.9z"/>
+            </svg>
+            CSS
+          </span>
         </div>
       </div>
-      <div class="sk-card reveal"><div class="sk-icon">🥈</div><div class="sk-name">Intermediate</div>
+
+      <!-- Intermediate -->
+      <div class="sk-card reveal" style="--tier-glow: 0 12px 36px rgba(0,229,255,0.08);">
+        <div class="sk-card-header">
+          <div class="sk-card-title-group">
+            <span class="sk-card-icon" style="background: rgba(0,229,255,0.1); border-color: rgba(0,229,255,0.2);">🥈</span>
+            <h3 class="sk-card-title">Intermediate</h3>
+          </div>
+          <span class="sk-card-count">6 Skills</span>
+        </div>
+        <p class="sk-card-desc">Frameworks, environments, and databases with solid production and project execution experience.</p>
+        <div class="sk-divider"></div>
         <div class="sk-pills">
-          <span class="sk-pill">React</span>
-          <span class="sk-pill">Next.js</span>
-          <span class="sk-pill">Node.js</span>
-          <span class="sk-pill">MongoDB</span>
-          <span class="sk-pill">Docker</span>
-          <span class="sk-pill">Jenkins</span>
+          <span class="sk-pill" style="--brand-color: #61DAFB; --hover-bg: rgba(97, 218, 251, 0.08); --hover-shadow: rgba(97, 218, 251, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <g class="brand-path-react" stroke="currentColor" stroke-width="1.5" fill="none"><circle cx="12" cy="12" r="2.5" fill="currentColor"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(30 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(90 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(150 12 12)"/></g>
+            </svg>
+            React
+          </span>
+          <span class="sk-pill" style="--brand-color: #ffffff; --hover-bg: rgba(255, 255, 255, 0.08); --hover-shadow: rgba(255, 255, 255, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-next" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.5 15.5l-4.5-6v6H10.5V8.5h1.5l4.5 6v-6h1.5v9z"/>
+            </svg>
+            Next.js
+          </span>
+          <span class="sk-pill" style="--brand-color: #339933; --hover-bg: rgba(51, 153, 51, 0.08); --hover-shadow: rgba(51, 153, 51, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-node" d="M12 2L3.5 7v10L12 22l8.5-5V7L12 2zm-1.5 14.5L7 13v-3.5L10.5 12v4.5zm5.5-1L12 17.5v-4.5l4-2.5v4.5z"/>
+            </svg>
+            Node.js
+          </span>
+          <span class="sk-pill" style="--brand-color: #47A248; --hover-bg: rgba(71, 162, 72, 0.08); --hover-shadow: rgba(71, 162, 72, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-mongo" d="M12 1.5c-.3 1.8-.7 3.5-1.3 5.2C9.5 10.3 7.5 13 7.5 15.5c0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5c0-2.5-2-5.2-3.2-8.8-.6-1.7-1-3.4-1.3-5.2z"/>
+            </svg>
+            MongoDB
+          </span>
+          <span class="sk-pill" style="--brand-color: #2496ED; --hover-bg: rgba(36, 150, 237, 0.08); --hover-shadow: rgba(36, 150, 237, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-docker" d="M2 10.5h2v2H2v-2zm3 0h2v2H5v-2zm3 0h2v2H8v-2zm3 0h2v2h-2v-2zm-6-3h2v2H5V7.5zm3 0h2v2H8V7.5zm3 0h2v2h-2V7.5zm3 0h2v2h-2V7.5zm-3-3h2v2h-2V4.5zm6 9.5c-1.5 2-4.5 3-7.5 3H3.5C2 17 1 16 1 14.5c0-2 1.5-3.5 3.5-3.5H19c.8 0 1.5.5 1.5 1.2 0 1.5-1.5 2.5-2.8 2.3z"/>
+            </svg>
+            Docker
+          </span>
+          <span class="sk-pill" style="--brand-color: #D24939; --hover-bg: rgba(210, 73, 57, 0.08); --hover-shadow: rgba(210, 73, 57, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-jenkins" d="M12 2a10 10 0 00-6.88 17.24l.56-.56a9.2 9.2 0 1112.64 0l.56.56A10 10 0 0012 2zm0 3a7 7 0 00-4.9 11.9l.56-.56A6.2 6.2 0 1116.34 16.34l.56.56A7 7 0 0012 5z"/>
+            </svg>
+            Jenkins
+          </span>
         </div>
       </div>
-      <div class="sk-card reveal"><div class="sk-icon">🥉</div><div class="sk-name">Familiar</div>
+
+      <!-- Familiar -->
+      <div class="sk-card reveal" style="--tier-glow: 0 12px 36px rgba(168,85,247,0.08);">
+        <div class="sk-card-header">
+          <div class="sk-card-title-group">
+            <span class="sk-card-icon" style="background: rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.2);">🥉</span>
+            <h3 class="sk-card-title">Familiar</h3>
+          </div>
+          <span class="sk-card-count">4 Skills</span>
+        </div>
+        <p class="sk-card-desc">Container orchestrators, API servers, IaC, and cloud infrastructure platforms.</p>
+        <div class="sk-divider"></div>
         <div class="sk-pills">
-          <span class="sk-pill">Kubernetes</span>
-          <span class="sk-pill">FastAPI</span>
-          <span class="sk-pill">Terraform</span>
-          <span class="sk-pill">AWS</span>
+          <span class="sk-pill" style="--brand-color: #326CE5; --hover-bg: rgba(50, 108, 229, 0.08); --hover-shadow: rgba(50, 108, 229, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-k8s" d="M12.002 2L4.004 5.3l1.528 8.956 6.47 5.744 6.47-5.744 1.528-8.956L12.002 2zm0 3.25l4.582 2.333-1.077 6.31-3.505 3.11-3.505-3.11-1.077-6.31 4.582-2.333z"/>
+            </svg>
+            Kubernetes
+          </span>
+          <span class="sk-pill" style="--brand-color: #009688; --hover-bg: rgba(0, 150, 136, 0.08); --hover-shadow: rgba(0, 150, 136, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-fastapi" d="M17 11h-4V4l-7 9h4v7l7-9z"/>
+            </svg>
+            FastAPI
+          </span>
+          <span class="sk-pill" style="--brand-color: #7B42BC; --hover-bg: rgba(123, 66, 188, 0.08); --hover-shadow: rgba(123, 66, 188, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <g class="brand-path-terraform" fill="currentColor"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="3" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/><rect x="9" y="15" width="5" height="5" rx="1"/></g>
+            </svg>
+            Terraform
+          </span>
+          <span class="sk-pill" style="--brand-color: #FF9900; --hover-bg: rgba(255, 153, 0, 0.08); --hover-shadow: rgba(255, 153, 0, 0.15);">
+            <svg viewBox="0 0 24 24">
+              <path class="brand-path-aws" d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+            </svg>
+            AWS
+          </span>
         </div>
       </div>
     </div>
@@ -2513,7 +2656,7 @@ window.toggleAudioFeedback = function () {
 // Hook up synth event listeners
 (function attachSynthListeners() {
   function applyListeners() {
-    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipeline-node').forEach(function (el) {
+    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipeline-node, .sk-pill').forEach(function (el) {
       if (el.dataset.synthBound) return;
       el.dataset.synthBound = "true";
       el.addEventListener('mouseenter', function () {
