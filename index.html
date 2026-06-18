@@ -267,10 +267,21 @@ section.visible .wipe-line{transform:scaleX(1);}
 
 /* LIVE STATS BAR */
 #live-stats{position:relative;z-index:10;background:rgba(10,16,32,.82);border-top:1px solid var(--gborder);border-bottom:1px solid var(--gborder);padding:1.4rem 4%;}
-.ls-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
+.ls-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;}
 .ls-item{text-align:center;}
-.ls-val{font-family:var(--font-d);font-size:1.75rem;font-weight:900;color:var(--cyan);display:block;text-shadow:0 0 18px rgba(0,229,255,.38);}
+.ls-val{font-family:var(--font-d);font-size:1.75rem;font-weight:900;color:var(--cyan);display:block;text-shadow:0 0 18px rgba(0,229,255,.38);transition:color var(--t), text-shadow var(--t);}
 .ls-lbl{font-size:.67rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;}
+
+@keyframes statsPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.52; }
+}
+.loading-pulse {
+  animation: statsPulse 1.5s infinite ease-in-out;
+  color: var(--muted2) !important;
+  text-shadow: none !important;
+}
+
 
 /* EXPERIENCE */
 #experience{background:rgba(10,16,32,.45);}
@@ -636,7 +647,7 @@ footer span{color:var(--cyan);}
   .gh-bottom,.lc-grid,.ach-grid,.contact-grid{grid-template-columns:1fr;}
   .ach-card.wide{grid-column:auto;}
   .gh-stats-row{grid-template-columns:repeat(2,1fr);}
-  .ls-inner{grid-template-columns:repeat(2,1fr);}
+  .ls-inner{grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));}
   .pipeline-svg{min-width:650px;}
 
   /* Floating Modal Close button on mobile/tablets */
@@ -684,7 +695,7 @@ footer span{color:var(--cyan);}
   .proj-grid{grid-template-columns:1fr;}
   .form-row{grid-template-columns:1fr;}
   .gh-stats-row{grid-template-columns:repeat(2,1fr);}
-  .ls-inner{grid-template-columns:1fr 1fr;}
+  .ls-inner{grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));}
   :root {
     --orbit-radius: 105px;
   }
@@ -1460,10 +1471,26 @@ footer span{color:var(--cyan);}
 <!-- LIVE STATS -->
 <div id="live-stats">
   <div class="ls-inner">
-    <div class="ls-item"><span class="ls-val" id="lc-solved-stat">—</span><div class="ls-lbl">LeetCode Solved</div></div>
-    <div class="ls-item"><span class="ls-val" id="gh-repos-stat">—</span><div class="ls-lbl">GitHub Repos</div></div>
-    <div class="ls-item"><span class="ls-val">7.45</span><div class="ls-lbl">CGPA</div></div>
-    <div class="ls-item"><span class="ls-val counter" data-target="3" data-suffix="">0</span><div class="ls-lbl">Certifications</div></div>
+    <div class="ls-item">
+      <span class="ls-val loading-pulse" id="lc-solved-stat">800+</span>
+      <div class="ls-lbl">LeetCode Solved</div>
+    </div>
+    <div class="ls-item">
+      <span class="ls-val loading-pulse" id="gh-repos-stat">24</span>
+      <div class="ls-lbl">GitHub Repos</div>
+    </div>
+    <div class="ls-item">
+      <span class="ls-val counter" id="project-count-stat" data-target="5" data-suffix="">5</span>
+      <div class="ls-lbl">Projects</div>
+    </div>
+    <div class="ls-item">
+      <span class="ls-val counter" id="certifications-count-stat" data-target="3" data-suffix="">3</span>
+      <div class="ls-lbl">Certifications</div>
+    </div>
+    <div class="ls-item">
+      <span class="ls-val">7.45</span>
+      <div class="ls-lbl">CGPA</div>
+    </div>
   </div>
 </div>
 
@@ -1839,7 +1866,7 @@ footer span{color:var(--cyan);}
     <h2 class="s-title reveal">Achievements &amp; <span>Extras</span></h2>
     <div class="ach-grid">
       <div class="ach-card reveal">
-        <div class="ach-num counter" id="ach-lc-counter" data-target="800" data-suffix="+">0</div>
+        <div class="ach-num counter" id="ach-lc-counter" data-target="800" data-suffix="+">800+</div>
         <div class="ach-title">LeetCode Problems Solved</div>
         <div class="ach-desc">Consistent competitive programming covering arrays, trees, dynamic programming, graphs, backtracking, and sliding window patterns.</div>
         <a href="https://leetcode.com/u/ed0629/" target="_blank" rel="noopener" class="ach-link">View LeetCode ↗</a>
@@ -2909,6 +2936,22 @@ function animateCounter(el, target, suffix) {
 window.animateCounter = animateCounter;
 
 (function () {
+  // Automatically calculate project and certification counts
+  var certCount = document.querySelectorAll('.cert-card').length || 3;
+  var projCount = document.querySelectorAll('.proj-card').length || 5;
+
+  var certEl = $('certifications-count-stat');
+  if (certEl) {
+    certEl.dataset.target = certCount;
+    certEl.textContent = certCount + (certEl.dataset.suffix || '');
+  }
+
+  var projEl = $('project-count-stat');
+  if (projEl) {
+    projEl.dataset.target = projCount;
+    projEl.textContent = projCount + (projEl.dataset.suffix || '');
+  }
+
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
@@ -2918,6 +2961,13 @@ window.animateCounter = animateCounter;
     });
   }, { threshold: 0.5 });
   document.querySelectorAll('.counter').forEach(function (el) { io.observe(el); });
+
+  // Safety timeout to remove any persistent loading states after 4 seconds
+  setTimeout(function () {
+    document.querySelectorAll('.loading-pulse').forEach(function (el) {
+      el.classList.remove('loading-pulse');
+    });
+  }, 4000);
 }());
 
 /* ─── 3D TILT ────────────────────────────────────────────────────────────── */
@@ -2938,7 +2988,13 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
 
   function renderStats(d) {
     var map = { 'gh-repos': fmt(d.publicRepos), 'gh-stars': fmt(d.totalStars), 'gh-followers': fmt(d.followers), 'gh-top-lang': d.topLanguage||'—', 'gh-repos-stat': fmt(d.publicRepos) };
-    Object.keys(map).forEach(function (id) { var el = $(id); if (el) el.textContent = map[id]; });
+    Object.keys(map).forEach(function (id) {
+      var el = $(id);
+      if (el) {
+        el.classList.remove('loading-pulse');
+        el.textContent = map[id];
+      }
+    });
   }
 
   function renderLangs(langs) {
@@ -3086,6 +3142,7 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
       if (window.animateCounter) window.animateCounter(achEl, d.total, '+');
     }
     if (statEl) {
+      statEl.classList.remove('loading-pulse');
       if (window.animateCounter) window.animateCounter(statEl, d.total, '+');
     }
 
