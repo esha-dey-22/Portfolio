@@ -240,10 +240,39 @@ section.visible .wipe-line{transform:scaleX(1);}
 .glitch::after{animation:glitch2 5s infinite;clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);transform:translateX(3px);}
 @keyframes glitch1{0%,88%,100%{opacity:0;}90%{transform:translateX(-4px);opacity:.7;filter:hue-rotate(90deg);}93%{transform:translateX(3px);opacity:.7;}96%{opacity:0;}}
 @keyframes glitch2{0%,88%,100%{opacity:0;}91%{transform:translateX(4px);opacity:.6;filter:hue-rotate(270deg);}94%{transform:translateX(-2px);opacity:.6;}97%{opacity:0;}}
-.hero-role{font-size:clamp(.9rem,1.8vw,1.2rem);font-weight:300;color:var(--muted2);margin-bottom:1.3rem;min-height:1.8rem;}
-.tw-cursor{display:inline-block;width:2px;height:.95em;background:var(--cyan);margin-left:2px;vertical-align:text-bottom;animation:blink .9s step-end infinite;}
-.acc-pill{display:inline-flex;align-items:center;gap:.55rem;padding:.45rem 1.1rem;border-radius:100px;background:rgba(168,85,247,.09);border:1px solid rgba(168,85,247,.28);color:#C4B5FD;font-size:.78rem;font-weight:600;margin-bottom:1.4rem;}
-.acc-pill .acc-tag{background:rgba(0,229,255,.14);color:var(--cyan);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:.14rem .48rem;border-radius:100px;}
+.hero-subtitle {
+  font-family: var(--font-d);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+.hero-tagline {
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  font-weight: 500;
+  color: var(--cyan);
+  margin-bottom: 1.4rem;
+  letter-spacing: 0.02em;
+}
+.hero-accenture-note {
+  font-size: 0.8rem;
+  color: var(--muted2);
+  margin-bottom: 1.6rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-accenture-note::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--violet2);
+  box-shadow: 0 0 6px var(--violet2);
+}
 .hero-bio{font-size:.91rem;color:var(--muted2);max-width:510px;margin-bottom:2.2rem;line-height:1.85;}
 .hero-actions{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:2.2rem;}
 .hero-socials{display:flex;gap:.65rem;}
@@ -1649,14 +1678,11 @@ footer span{color:var(--cyan);}
   <div class="hero-inner">
     <div>
       <div class="hero-badge"><span class="dot dot-green"></span>Open to Opportunities</div>
-      <div class="acc-pill">
-        <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#A100FF"/><text x="12" y="16" text-anchor="middle" fill="white" font-size="10" font-weight="bold">A</text></svg>
-        Incoming AASE @ Accenture
-        <span class="acc-tag">Offer Accepted</span>
-      </div>
       <div class="hero-name"><span class="glitch" data-text="Esha Dey">Esha Dey</span></div>
-      <div class="hero-role"><span id="tw"></span><span class="tw-cursor"></span></div>
-      <p class="hero-bio">Computer Science student at LPU building full-stack platforms, AI-powered civic tech, and DevOps-ready systems. Incoming Advanced Associate Software Engineer at Accenture.</p>
+      <div class="hero-subtitle">Computer Science Engineer</div>
+      <div class="hero-tagline">Full-Stack Developer | DevOps Enthusiast | Problem Solver</div>
+      <p class="hero-bio">Building scalable web applications and deployment pipelines with modern development and DevOps practices.</p>
+      <div class="hero-accenture-note">Incoming Advanced App Engineering Associate at Accenture</div>
       <div class="hero-actions">
         <a href="#projects" class="btn-primary"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 3 19 12 5 21 5 3"/></svg>View Work</a>
         <a href="#contact" class="btn-ghost">Get in Touch</a>
@@ -1670,7 +1696,7 @@ footer span{color:var(--cyan);}
       </div>
       <div class="status-bar">
         <div class="status-item"><span class="dot dot-green"></span><strong>Available</strong>&nbsp;for Live Projects/Jobs/Internships</div>
-        <div class="status-item"><span class="dot dot-cyan"></span><strong>Accenture</strong>&nbsp;offer accepted</div>
+        <div class="status-item"><span class="dot dot-cyan"></span>Incoming Associate @ Accenture</div>
         <div class="status-item">📍 Kolkata, West Bengal - India</div>
       </div>
     </div>
