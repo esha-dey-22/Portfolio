@@ -4117,13 +4117,23 @@ window.toggleAudioFeedback = function () {
 
   function spyScroll() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-    var scrollPos = scrollTop + 180; // trigger offset
     var currentSection = null;
-
-    for (var i = 0; i < sections.length; i++) {
-      var sec = sections[i];
-      if (sec.offsetTop <= scrollPos) {
-        currentSection = sec;
+    
+    // Check if we are at the bottom of the page
+    var isAtBottom = (window.innerHeight + scrollTop) >= (document.documentElement.scrollHeight - 20);
+    
+    if (isAtBottom && sections.length > 0) {
+      currentSection = sections[sections.length - 1];
+    } else {
+      // Find which section spans across the target line (150px from the top)
+      var targetLine = 150; 
+      for (var i = 0; i < sections.length; i++) {
+        var sec = sections[i];
+        var rect = sec.getBoundingClientRect();
+        if (rect.top <= targetLine && rect.bottom >= targetLine) {
+          currentSection = sec;
+          break;
+        }
       }
     }
 
