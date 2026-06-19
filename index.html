@@ -401,6 +401,137 @@ section.visible .wipe-line{transform:scaleX(1);}
 .exp-points{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
 .exp-points li{display:flex;align-items:flex-start;gap:.7rem;font-size:.86rem;color:var(--muted2);line-height:1.65;}
 .exp-points li::before{content:'▶';color:var(--cyan);font-size:.48rem;margin-top:.45rem;flex-shrink:0;}
+/* TIMELINE SECTION */
+#timeline {
+  background: rgba(6, 10, 18, 0.3);
+  position: relative;
+  padding: 80px 4% 60px 4%;
+  z-index: 10;
+}
+.timeline-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 3rem auto 0 auto;
+}
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--cyan), var(--violet2));
+  transform: translateX(-50%);
+  opacity: 0.3;
+}
+.timeline-item {
+  position: relative;
+  width: 50%;
+  margin-bottom: 2.5rem;
+  display: flex;
+}
+.timeline-item.left {
+  left: 0;
+  padding-right: 3rem;
+  justify-content: flex-end;
+}
+.timeline-item.right {
+  left: 50%;
+  padding-left: 3rem;
+  justify-content: flex-start;
+}
+.timeline-dot {
+  position: absolute;
+  top: 1.5rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  transition: background var(--t), transform var(--t), box-shadow var(--t);
+  z-index: 5;
+}
+.timeline-item.left .timeline-dot {
+  right: -7px;
+}
+.timeline-item.right .timeline-dot {
+  left: -7px;
+}
+.timeline-content {
+  background: var(--glass);
+  border: 1px solid var(--gborder);
+  border-radius: var(--r);
+  padding: 1.8rem;
+  backdrop-filter: blur(12px);
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  transition: transform var(--t), border-color var(--t), box-shadow var(--t);
+  transform-style: preserve-3d;
+}
+.timeline-item:hover .timeline-dot {
+  background: var(--cyan);
+  transform: scale(1.3);
+  box-shadow: 0 0 15px var(--cyan);
+}
+.timeline-item.left:hover .timeline-dot {
+  border-color: var(--violet2);
+  box-shadow: 0 0 15px var(--violet2);
+  background: var(--violet2);
+}
+.timeline-content:hover {
+  transform: translateY(-5px);
+  border-color: var(--cyan);
+  box-shadow: 0 10px 30px rgba(0, 229, 255, 0.08);
+}
+.timeline-item.left .timeline-content:hover {
+  border-color: var(--violet2);
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.08);
+}
+.timeline-year {
+  font-family: var(--font-d);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--cyan);
+  margin-bottom: 0.5rem;
+}
+.timeline-item.left .timeline-year {
+  color: var(--violet2);
+}
+.timeline-title {
+  font-family: var(--font-d);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+.timeline-desc {
+  font-size: 0.84rem;
+  color: var(--muted2);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 20px;
+  }
+  .timeline-item {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .timeline-item.left, .timeline-item.right {
+    left: 0;
+    padding-left: 45px;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+  .timeline-item.left .timeline-dot, .timeline-item.right .timeline-dot {
+    left: 13px;
+  }
+  .timeline-content {
+    max-width: 100%;
+  }
+}
 
 /* SKILLS */
 #skills{background:rgba(10,16,32,.5);position:relative;}
@@ -1702,7 +1833,7 @@ footer span{color:var(--cyan);}
   stroke-dashoffset: 1000;
   transition: stroke-dashoffset 0.85s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.sk-card:hover .border-tracer rect, .proj-card:hover .border-tracer rect, .impact-card:hover .border-tracer rect {
+.sk-card:hover .border-tracer rect, .proj-card:hover .border-tracer rect, .impact-card:hover .border-tracer rect, .timeline-content:hover .border-tracer rect {
   stroke-dashoffset: 0;
 }
 </style>
@@ -1729,6 +1860,7 @@ footer span{color:var(--cyan);}
   <a href="#hero" class="nav-logo">ED<span class="blink">_</span></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#timeline">Timeline</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#devops">DevOps</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -1917,6 +2049,62 @@ footer span{color:var(--cyan);}
         <li>Role will involve contributing to large-scale software systems and cross-functional engineering teams across global clients.</li>
         <li>Accenture is a Fortune 500 global technology services company operating in 120+ countries.</li>
       </ul>
+    </div>
+  </div>
+
+<!-- TIMELINE -->
+<section id="timeline" class="section reveal">
+  <div class="wipe-line"></div>
+  <div class="inner">
+    <p class="s-label reveal">timeline</p>
+    <h2 class="s-title reveal">Milestones & <span>Journey</span></h2>
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      
+      <div class="timeline-item reveal left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2022</div>
+          <h3 class="timeline-title">Started B.Tech CSE</h3>
+          <p class="timeline-desc">Embarked on Computer Science & Engineering journey at LPU, establishing strong fundamentals in programming, mathematics, and algorithms.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item reveal right">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2023</div>
+          <h3 class="timeline-title">Built First Major Web Projects</h3>
+          <p class="timeline-desc">Designed and deployed full-stack web applications, mastering frontend frameworks, interactive layouts, responsive design, and database integrations.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item reveal left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2024</div>
+          <h3 class="timeline-title">Learned DevOps & Cloud Technologies</h3>
+          <p class="timeline-desc">Deep-dived into automation pipelines, cloud architecture, scripting, containerizing microservices, and setting up automated builds.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item reveal right">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2025</div>
+          <h3 class="timeline-title">Developed CivicConnect & StreamFlare</h3>
+          <p class="timeline-desc">Architected high-impact software systems: CivicConnect (AI-assisted civic complaint manager) and StreamFlare (multi-device entertainment streaming platform).</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item reveal left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2026</div>
+          <h3 class="timeline-title">Incoming AASE @ Accenture</h3>
+          <p class="timeline-desc">Offer accepted as Incoming Advanced Associate Software Engineer at Accenture. Preparing to build premium enterprise software and deployment solutions.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -3532,7 +3720,7 @@ function apiFetch(path, cb, errCb) {
   });
 
   // Hover animations
-  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .pipe-node, .devops-pill, .ls-card').forEach(function (el) {
+  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .pipe-node, .devops-pill, .ls-card, .timeline-content').forEach(function (el) {
     el.addEventListener('mouseenter', function () {
       dot.style.width = '12px'; dot.style.height = '12px'; dot.style.background = 'var(--violet2)';
       ring.style.width = '48px'; ring.style.height = '48px'; ring.style.borderColor = 'var(--violet2)';
@@ -3759,7 +3947,7 @@ window.toggleAudioFeedback = function () {
 // Hook up synth event listeners
 (function attachSynthListeners() {
   function applyListeners() {
-    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipe-node, .sk-pill, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .devops-pill, .ls-card').forEach(function (el) {
+    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipe-node, .sk-pill, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .devops-pill, .ls-card, .timeline-content').forEach(function (el) {
       if (el.dataset.synthBound) return;
       el.dataset.synthBound = "true";
       el.addEventListener('mouseenter', function () {
@@ -3793,7 +3981,7 @@ window.toggleAudioFeedback = function () {
     '  <rect x="0" y="0" width="100%" height="100%" rx="14" ry="14" fill="none" stroke-width="2" />' +
     '</svg>';
 
-  document.querySelectorAll('.sk-card, .proj-card, .impact-card').forEach(function (card) {
+  document.querySelectorAll('.sk-card, .proj-card, .impact-card, .timeline-content').forEach(function (card) {
     card.style.position = 'relative';
     var wrapper = document.createElement('div');
     wrapper.innerHTML = tracerHTML.trim();
@@ -3835,6 +4023,7 @@ window.toggleAudioFeedback = function () {
   var sections = [
     $('hero'),
     $('experience'),
+    $('timeline'),
     $('skills'),
     $('devops'),
     $('projects'),
