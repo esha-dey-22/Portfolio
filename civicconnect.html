@@ -10,18 +10,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #060a12;
-      --bg-card: #0d121f;
+      --bg-grad: radial-gradient(circle at 50% 50%, #080c18 0%, #03050a 100%);
+      --bg: #03050a;
+      --bg-card: rgba(10, 16, 32, 0.5);
       --cyan: #00e5ff;
       --violet: #a855f7;
       --violet2: #7b2fbe;
       --white: #f8fafc;
       --muted: #94a3b8;
       --muted2: #64748b;
-      --glass: rgba(15, 22, 44, 0.65);
+      --glass: rgba(10, 16, 32, 0.6);
       --gborder: rgba(255, 255, 255, 0.06);
       --r: 16px;
-      --t: 0.25s ease;
+      --t: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
@@ -31,7 +32,8 @@
     }
 
     body {
-      background-color: var(--bg);
+      background: var(--bg-grad);
+      background-attachment: fixed;
       color: var(--muted);
       font-family: 'Inter', sans-serif;
       line-height: 1.7;
@@ -40,12 +42,14 @@
 
     header {
       border-bottom: 1px solid var(--gborder);
-      padding: 1.5rem 5%;
+      padding: 1.1rem 5%;
       position: sticky;
       top: 0;
-      background: rgba(6, 10, 18, 0.8);
-      backdrop-filter: blur(12px);
+      background: rgba(8, 12, 24, 0.45);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       z-index: 100;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     }
 
     .nav-container {
