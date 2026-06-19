@@ -294,12 +294,87 @@ section.visible .wipe-line{transform:scaleX(1);}
 .av-img{width:300px;height:300px;border-radius:50%;object-fit:cover;object-position:top center;border:3px solid var(--bg);position:relative;z-index:2;filter:brightness(.97) contrast(1.05) saturate(1.08);pointer-events:auto;}
 .av-glow{position:absolute;inset:0;border-radius:50%;z-index:3;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(0,229,255,.1) 0%,transparent 65%);}
 
-/* LIVE STATS BAR */
-#live-stats{position:relative;z-index:10;background:rgba(10,16,32,.82);border-top:1px solid var(--gborder);border-bottom:1px solid var(--gborder);padding:1.4rem 4%;}
-.ls-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;}
-.ls-item{text-align:center;}
-.ls-val{font-family:var(--font-d);font-size:1.75rem;font-weight:900;color:var(--cyan);display:block;text-shadow:0 0 18px rgba(0,229,255,.38);transition:color var(--t), text-shadow var(--t);}
-.ls-lbl{font-size:.67rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;}
+/* ENGINEERING SNAPSHOT DASHBOARD */
+#snapshot {
+  padding: 80px 4% 60px 4%;
+  position: relative;
+  z-index: 10;
+}
+.ls-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.2rem;
+}
+.ls-card {
+  background: var(--glass);
+  border: 1px solid var(--gborder);
+  border-radius: var(--r);
+  padding: 1.25rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  backdrop-filter: blur(12px);
+  transition: transform var(--t), border-color var(--t), box-shadow var(--t);
+}
+.ls-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--cyan);
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.12);
+}
+.ls-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.snap-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--t);
+}
+.ls-card:hover .snap-icon {
+  transform: scale(1.15);
+}
+.ls-card-info {
+  display: flex;
+  flex-direction: column;
+}
+.ls-val {
+  font-family: var(--font-d);
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.15;
+  transition: color var(--t);
+}
+.ls-lbl {
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.lc-icon { background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); color: #F59E0B; }
+.gh-icon { background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2); color: var(--violet2); }
+.proj-icon { background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.2); color: var(--cyan); }
+.tech-icon { background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); color: #10B981; }
+.cert-icon { background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); color: #3B82F6; }
+
+@media(max-width: 768px) {
+  .ls-inner {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media(max-width: 480px) {
+  .ls-inner {
+    grid-template-columns: 1fr !important;
+  }
+}
 
 @keyframes statsPulse {
   0%, 100% { opacity: 1; }
@@ -1743,31 +1818,81 @@ footer span{color:var(--cyan);}
   </div>
 </section>
 
-<!-- LIVE STATS -->
-<div id="live-stats">
+<!-- ENGINEERING SNAPSHOT DASHBOARD -->
+<section id="snapshot" class="section reveal">
   <div class="ls-inner">
-    <div class="ls-item">
-      <span class="ls-val loading-pulse" id="lc-solved-stat">800+</span>
-      <div class="ls-lbl">LeetCode Solved</div>
+    <div class="ls-card">
+      <div class="ls-card-icon lc-icon">
+        <svg class="snap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+      </div>
+      <div class="ls-card-info">
+        <span class="ls-val loading-pulse" id="lc-solved-stat">800+</span>
+        <span class="ls-lbl">LeetCode Problems Solved</span>
+      </div>
     </div>
-    <div class="ls-item">
-      <span class="ls-val loading-pulse" id="gh-repos-stat">24</span>
-      <div class="ls-lbl">GitHub Repos</div>
+    <div class="ls-card">
+      <div class="ls-card-icon gh-icon">
+        <svg class="snap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="6" y1="3" x2="6" y2="15"></line>
+          <circle cx="18" cy="6" r="3"></circle>
+          <circle cx="6" cy="18" r="3"></circle>
+          <path d="M18 9a9 9 0 0 1-9 9"></path>
+        </svg>
+      </div>
+      <div class="ls-card-info">
+        <span class="ls-val loading-pulse" id="gh-repos-stat">24</span>
+        <span class="ls-lbl">GitHub Repositories</span>
+      </div>
     </div>
-    <div class="ls-item">
-      <span class="ls-val counter" id="project-count-stat" data-target="5" data-suffix="">5</span>
-      <div class="ls-lbl">Projects</div>
+    <div class="ls-card">
+      <div class="ls-card-icon proj-icon">
+        <svg class="snap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+      </div>
+      <div class="ls-card-info">
+        <span class="ls-val counter" id="project-count-stat" data-target="5" data-suffix="">5</span>
+        <span class="ls-lbl">Projects Built</span>
+      </div>
     </div>
-    <div class="ls-item">
-      <span class="ls-val counter" id="certifications-count-stat" data-target="3" data-suffix="">3</span>
-      <div class="ls-lbl">Certifications</div>
+    <div class="ls-card">
+      <div class="ls-card-icon tech-icon">
+        <svg class="snap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+          <rect x="9" y="9" width="6" height="6"></rect>
+          <line x1="9" y1="1" x2="9" y2="4"></line>
+          <line x1="15" y1="1" x2="15" y2="4"></line>
+          <line x1="9" y1="20" x2="9" y2="23"></line>
+          <line x1="15" y1="20" x2="15" y2="23"></line>
+          <line x1="20" y1="9" x2="23" y2="9"></line>
+          <line x1="20" y1="15" x2="23" y2="15"></line>
+          <line x1="1" y1="9" x2="4" y2="9"></line>
+          <line x1="1" y1="15" x2="4" y2="15"></line>
+        </svg>
+      </div>
+      <div class="ls-card-info">
+        <span class="ls-val counter" id="tech-count-stat" data-target="21" data-suffix="+">21+</span>
+        <span class="ls-lbl">Technologies Used</span>
+      </div>
     </div>
-    <div class="ls-item">
-      <span class="ls-val">7.45</span>
-      <div class="ls-lbl">CGPA</div>
+    <div class="ls-card">
+      <div class="ls-card-icon cert-icon">
+        <svg class="snap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="7"></circle>
+          <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+        </svg>
+      </div>
+      <div class="ls-card-info">
+        <span class="ls-val counter" id="certifications-count-stat" data-target="3" data-suffix="">3</span>
+        <span class="ls-lbl">Certifications Earned</span>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
@@ -3407,7 +3532,7 @@ function apiFetch(path, cb, errCb) {
   });
 
   // Hover animations
-  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .pipe-node, .devops-pill').forEach(function (el) {
+  document.querySelectorAll('a, button, .proj-card, .sk-card, .cert-card, .soc, .orbit-item, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .pipe-node, .devops-pill, .ls-card').forEach(function (el) {
     el.addEventListener('mouseenter', function () {
       dot.style.width = '12px'; dot.style.height = '12px'; dot.style.background = 'var(--violet2)';
       ring.style.width = '48px'; ring.style.height = '48px'; ring.style.borderColor = 'var(--violet2)';
@@ -3634,7 +3759,7 @@ window.toggleAudioFeedback = function () {
 // Hook up synth event listeners
 (function attachSynthListeners() {
   function applyListeners() {
-    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipe-node, .sk-pill, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .devops-pill').forEach(function (el) {
+    document.querySelectorAll('a, button, .soc, .sk-card, .proj-card, .orbit-item, .pipe-node, .sk-pill, .impact-card, .arch-btn, .arch-modal-close, .proj-action-btn, .devops-pill, .ls-card').forEach(function (el) {
       if (el.dataset.synthBound) return;
       el.dataset.synthBound = "true";
       el.addEventListener('mouseenter', function () {
@@ -3888,9 +4013,10 @@ function animateCounter(el, target, suffix) {
 window.animateCounter = animateCounter;
 
 (function () {
-  // Automatically calculate project and certification counts
+  // Automatically calculate project, technology and certification counts
   var certCount = document.querySelectorAll('.cert-card').length || 3;
   var projCount = document.querySelectorAll('.proj-card').length || 5;
+  var techCount = document.querySelectorAll('.sk-pill').length || 21;
 
   var certEl = $('certifications-count-stat');
   if (certEl) {
@@ -3902,6 +4028,12 @@ window.animateCounter = animateCounter;
   if (projEl) {
     projEl.dataset.target = projCount;
     projEl.textContent = projCount + (projEl.dataset.suffix || '');
+  }
+
+  var techEl = $('tech-count-stat');
+  if (techEl) {
+    techEl.dataset.target = techCount;
+    techEl.textContent = techCount + (techEl.dataset.suffix || '');
   }
 
   var io = new IntersectionObserver(function (entries) {
@@ -3944,7 +4076,11 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
       var el = $(id);
       if (el) {
         el.classList.remove('loading-pulse');
-        el.textContent = map[id];
+        if (id === 'gh-repos-stat' && window.animateCounter) {
+          window.animateCounter(el, d.publicRepos, '');
+        } else {
+          el.textContent = map[id];
+        }
       }
     });
   }
