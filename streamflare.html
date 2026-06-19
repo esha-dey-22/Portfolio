@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StreamFlare Case Study - Esha Dey Engineering Blog">
+  <title>StreamFlare Case Study | Esha Dey Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060a12;
+      --bg-card: #0d121f;
+      --cyan: #00e5ff;
+      --violet: #a855f7;
+      --violet2: #7b2fbe;
+      --white: #f8fafc;
+      --muted: #94a3b8;
+      --muted2: #64748b;
+      --glass: rgba(15, 22, 44, 0.65);
+      --gborder: rgba(255, 255, 255, 0.06);
+      --r: 16px;
+      --t: 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    header {
+      border-bottom: 1px solid var(--gborder);
+      padding: 1.5rem 5%;
+      position: sticky;
+      top: 0;
+      background: rgba(6, 10, 18, 0.8);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      font-family: 'Outfit', sans-serif;
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      transition: transform var(--t), color var(--t);
+    }
+
+    .back-link:hover {
+      transform: translateX(-4px);
+      color: var(--white);
+    }
+
+    .blog-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .blog-logo span {
+      color: var(--cyan);
+    }
+
+    /* READING PROGRESS BAR */
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      width: 0%;
+      transition: width 0.1s ease-out;
+    }
+
+    main {
+      max-width: 820px;
+      margin: 3.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .post-meta {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--white);
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--gborder);
+      padding-bottom: 1.5rem;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--violet2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .author-info div {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .author-info span {
+      font-size: 0.78rem;
+      color: var(--muted2);
+    }
+
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--white);
+      font-size: 1.8rem;
+      margin-top: 3.5rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    h2::before {
+      content: '';
+      position: absolute;
+      left: -18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 18px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+
+    p {
+      margin-bottom: 1.6rem;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+    }
+
+    .highlight-box {
+      background: var(--glass);
+      border-left: 3px solid var(--violet);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-style: italic;
+      color: var(--white);
+    }
+
+    /* CODE BLOCKS */
+    pre {
+      background: #090d16;
+      border: 1px solid var(--gborder);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+    }
+
+    .keyword { color: #f472b6; }
+    .string { color: #34d399; }
+    .function { color: #60a5fa; }
+    .comment { color: #64748b; }
+    .number { color: #fbbf24; }
+
+    /* SVG ARCHITECTURE */
+    .arch-container {
+      background: var(--glass);
+      border: 1px solid var(--gborder);
+      border-radius: var(--r);
+      padding: 2rem 1.5rem;
+      margin: 2.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .arch-svg {
+      width: 100%;
+      max-width: 680px;
+      height: auto;
+      display: block;
+    }
+
+    .arch-caption {
+      font-size: 0.8rem;
+      color: var(--muted2);
+      margin-top: 1rem;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    ul, ol {
+      margin-bottom: 1.6rem;
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .tech-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--gborder);
+      border-radius: 8px;
+      padding: 1rem;
+      transition: border-color var(--t);
+    }
+
+    .tech-card:hover {
+      border-color: var(--cyan);
+    }
+
+    .tech-card strong {
+      display: block;
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      margin-bottom: 0.25rem;
+    }
+
+    .tech-card span {
+      font-size: 0.8rem;
+      color: var(--muted2);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gborder);
+      padding: 3rem 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted2);
+    }
+
+    footer a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.1rem; }
+      h2 { font-size: 1.5rem; }
+      p, li { font-size: 0.95rem; }
+      body { line-height: 1.6; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="back-link">← Back to Portfolio</a>
+      <a href="index.html" class="blog-logo">EshaDey<span>.log</span></a>
+    </div>
+    <div class="progress-bar" id="progressBar"></div>
+  </header>
+
+  <!-- MAIN POST CONTENT -->
+  <main>
+    <div class="post-meta">Case Study // DevOps & Web Design</div>
+    <h1>Designing StreamFlare: High-Fidelity Streaming & CI/CD</h1>
+    
+    <div class="post-author">
+      <div class="author-avatar">ED</div>
+      <div class="author-info">
+        <div>Esha Dey</div>
+        <span>November 12, 2024 · 5 min read</span>
+      </div>
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>With streaming entertainment dominating the web space, constructing responsive media portals that adapt seamlessly across mobile phones, tablets, smart TVs, and desktop monitors remains a constant challenge. More importantly, static web builds often suffer from inconsistent configurations between development machines and production environments. Without a standardized containerization and deployment pipeline, pushing minor catalog or layout updates results in visual breaks and delivery delays.</p>
+
+    <div class="highlight-box">
+      <p>"For engineering teams, the priority is code shipping consistency. Standardizing on Docker containers and automating builds removes environment discrepancies."</p>
+    </div>
+
+    <h2>Requirements</h2>
+    <p>The platform was designed around a set of core UI and operational DevOps requirements:</p>
+    <ul>
+      <li><strong>High-Fidelity UI Grid</strong>: A Netflix-style catalog layouts featuring movies, music sliders, and gaming cards.</li>
+      <li><strong>Cross-Device Responsive Design</strong>: Fluid scaling of media panels across viewport widths from 320px to 1920px.</li>
+      <li><strong>Automated CI/CD Workflows</strong>: Auto-compile, lint, and packaging pipelines that trigger immediately on code push.</li>
+      <li><strong>Containerized Packaging</strong>: Containerize static files inside light Nginx layers for reliable execution.</li>
+      <li><strong>Docker Hub Registry</strong>: Automatically upload and version tagged images to Docker Hub repositories.</li>
+    </ul>
+
+    <h2>Architecture</h2>
+    <p>StreamFlare uses an automated pipeline-centric architecture to manage code compiles, container packaging, and web server deployments.</p>
+
+    <!-- SVG DIAGRAM -->
+    <div class="arch-container">
+      <svg class="arch-svg" viewBox="0 0 600 240">
+        <!-- Developer -->
+        <circle cx="50" cy="110" r="18" fill="var(--bg-card)" stroke="var(--cyan)" stroke-width="2"/>
+        <text x="50" y="114" fill="var(--white)" font-size="9" font-family="Outfit" text-anchor="middle">Dev</text>
+
+        <!-- GitHub -->
+        <rect x="130" y="80" width="80" height="60" rx="8" fill="var(--bg-card)" stroke="var(--violet)" stroke-width="2"/>
+        <text x="170" y="115" fill="var(--white)" font-size="10" font-family="Outfit" font-weight="bold" text-anchor="middle">GitHub Repo</text>
+
+        <!-- Jenkins -->
+        <rect x="260" y="80" width="90" height="60" rx="8" fill="var(--bg-card)" stroke="#f59e0b" stroke-width="2"/>
+        <text x="305" y="115" fill="var(--white)" font-size="10" font-family="Outfit" font-weight="bold" text-anchor="middle">Jenkins CI/CD</text>
+
+        <!-- Docker Hub -->
+        <rect x="400" y="80" width="90" height="60" rx="8" fill="var(--bg-card)" stroke="#2496ed" stroke-width="2"/>
+        <text x="445" y="115" fill="var(--white)" font-size="10" font-family="Outfit" font-weight="bold" text-anchor="middle">Docker Hub</text>
+
+        <!-- Deployment Server -->
+        <rect x="520" y="85" width="60" height="50" rx="8" fill="var(--bg-card)" stroke="#10b981" stroke-width="1.5"/>
+        <text x="550" y="114" fill="var(--white)" font-size="9" font-family="Outfit" text-anchor="middle">Deploy</text>
+
+        <!-- Connections -->
+        <!-- Dev to Git -->
+        <path d="M 68 110 L 130 110" stroke="var(--cyan)" stroke-width="2" fill="none"/>
+        <polygon points="130,110 122,105 122,115" fill="var(--cyan)"/>
+
+        <!-- Git to Jenkins -->
+        <path d="M 210 110 L 260 110" stroke="var(--violet)" stroke-width="2" fill="none"/>
+        <polygon points="260,110 252,105 252,115" fill="var(--violet)"/>
+        
+        <!-- Jenkins to Docker Hub -->
+        <path d="M 350 110 L 400 110" stroke="#f59e0b" stroke-width="2" fill="none"/>
+        <polygon points="400,110 392,105 392,115" fill="#f59e0b"/>
+
+        <!-- Docker Hub to Deployment Server -->
+        <path d="M 490 110 L 520 110" stroke="#2496ed" stroke-dasharray="3,3" stroke-width="1.5" fill="none"/>
+        
+        <!-- Labeling -->
+        <text x="99" y="100" fill="var(--muted2)" font-size="8" font-family="Fira Code" text-anchor="middle">git push</text>
+        <text x="235" y="100" fill="var(--muted2)" font-size="8" font-family="Fira Code" text-anchor="middle">Webhook</text>
+        <text x="375" y="100" fill="var(--muted2)" font-size="8" font-family="Fira Code" text-anchor="middle">docker push</text>
+      </svg>
+      <div class="arch-caption">Figure 1.0: Continuous Integration & Deployment Pipeline of StreamFlare</div>
+    </div>
+
+    <h2>Technology Choices</h2>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <strong>HTML5 & CSS3</strong>
+        <span>Leveraged semantic page tags, flexible layouts, and smooth transition animations to achieve a premium dark UI aesthetic.</span>
+      </div>
+      <div class="tech-card">
+        <strong>Bootstrap Grid</strong>
+        <span>Used Bootstrap's fluid grid rules for cross-device viewport compatibility.</span>
+      </div>
+      <div class="tech-card">
+        <strong>Jenkins Pipeline</strong>
+        <span>Automation engine chosen to build pipelines and integrate unit testing and container generation.</span>
+      </div>
+      <div class="tech-card">
+        <strong>Docker & Nginx</strong>
+        <span>Encapsulated the web catalog inside Nginx server layers within a container to guarantee offline environment consistency.</span>
+      </div>
+    </div>
+
+    <h2>Challenges Faced</h2>
+    <p>During the design phase, **Browser Catalog Layout Shift** was a prominent issue. Lazy-loading movie card thumbnails on low-bandwidth networks caused elements to shift, creating bad layout jitters during page scroll.</p>
+    <p>On the DevOps side, **Docker Image Layer Overhead** inside Jenkins builds caused pipeline delays. Storing redundant files and dependencies in the image increased container sizes to 450MB, slowing down network push operations to Docker Hub.</p>
+
+    <h2>Solutions Implemented</h2>
+    <p>To eliminate browser catalog shifts, we defined fixed card aspect-ratio rules in CSS and created a glowing grid **skeleton wrapper** inside the Bootstrap containers, ensuring layout frames stayed rigid while image assets loaded.</p>
+    <p>To optimize container builds, we implemented **Multistage Dockerfile builds** utilizing lightweight Nginx Alpine bases, reducing final image sizes from 450MB to a mere **22MB**.</p>
+
+    <pre><code><span class="comment"># Multistage Container Build in Jenkinsfile Pipeline</span>
+<span class="keyword">pipeline</span> {
+  <span class="keyword">agent</span> <span class="keyword">any</span>
+  <span class="keyword">stages</span> {
+    <span class="keyword">stage</span>(<span class="string">'Clone'</span>) {
+      <span class="keyword">steps</span> { <span class="keyword">git</span> <span class="string">'https://github.com/esha-dey-22/StreamFlare'</span> }
+    }
+    <span class="keyword">stage</span>(<span class="string">'Build Docker Image'</span>) {
+      <span class="keyword">steps</span> {
+        <span class="keyword">sh</span> <span class="string">'docker build -t eshadey/streamflare:${BUILD_NUMBER} .'</span>
+      }
+    }
+    <span class="keyword">stage</span>(<span class="string">'Push Registry'</span>) {
+      <span class="keyword">steps</span> {
+        <span class="keyword">withCredentials</span>([<span class="function">string</span>(credentialsId: <span class="string">'docker-hub-pw'</span>, variable: <span class="string">'PASSWORD'</span>)]) {
+          <span class="keyword">sh</span> <span class="string">'docker login -u eshadey -p ${PASSWORD}'</span>
+          <span class="keyword">sh</span> <span class="string">'docker push eshadey/streamflare:${BUILD_NUMBER}'</span>
+        }
+      }
+    }
+  }
+}</code></pre>
+
+    <h2>Future Improvements</h2>
+    <p>We plan to implement **WebSocket Stream Buffering** on the frontend, allowing for interactive audio visualizers. In addition, configuring CDN-backed asset delivery networks will guarantee high-performance layout rendering for international visitors.</p>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Esha Dey. Codebase available on <a href="https://github.com/esha-dey-22" target="_blank" rel="noopener">GitHub</a>.</p>
+  </footer>
+
+  <script>
+    // READING PROGRESS INDICATOR
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+  </script>
+</body>
+</html>

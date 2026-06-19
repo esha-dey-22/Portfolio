@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CivicConnect Case Study - Esha Dey Engineering Blog">
+  <title>CivicConnect Case Study | Esha Dey Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060a12;
+      --bg-card: #0d121f;
+      --cyan: #00e5ff;
+      --violet: #a855f7;
+      --violet2: #7b2fbe;
+      --white: #f8fafc;
+      --muted: #94a3b8;
+      --muted2: #64748b;
+      --glass: rgba(15, 22, 44, 0.65);
+      --gborder: rgba(255, 255, 255, 0.06);
+      --r: 16px;
+      --t: 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    header {
+      border-bottom: 1px solid var(--gborder);
+      padding: 1.5rem 5%;
+      position: sticky;
+      top: 0;
+      background: rgba(6, 10, 18, 0.8);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      font-family: 'Outfit', sans-serif;
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      transition: transform var(--t), color var(--t);
+    }
+
+    .back-link:hover {
+      transform: translateX(-4px);
+      color: var(--white);
+    }
+
+    .blog-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .blog-logo span {
+      color: var(--cyan);
+    }
+
+    /* READING PROGRESS BAR */
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      width: 0%;
+      transition: width 0.1s ease-out;
+    }
+
+    main {
+      max-width: 820px;
+      margin: 3.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .post-meta {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--white);
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--gborder);
+      padding-bottom: 1.5rem;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--violet2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .author-info div {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .author-info span {
+      font-size: 0.78rem;
+      color: var(--muted2);
+    }
+
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--white);
+      font-size: 1.8rem;
+      margin-top: 3.5rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    h2::before {
+      content: '';
+      position: absolute;
+      left: -18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 18px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+
+    p {
+      margin-bottom: 1.6rem;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+    }
+
+    .highlight-box {
+      background: var(--glass);
+      border-left: 3px solid var(--violet);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-style: italic;
+      color: var(--white);
+    }
+
+    /* CODE BLOCKS */
+    pre {
+      background: #090d16;
+      border: 1px solid var(--gborder);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+    }
+
+    .keyword { color: #f472b6; }
+    .string { color: #34d399; }
+    .function { color: #60a5fa; }
+    .comment { color: #64748b; }
+    .number { color: #fbbf24; }
+
+    /* SVG ARCHITECTURE */
+    .arch-container {
+      background: var(--glass);
+      border: 1px solid var(--gborder);
+      border-radius: var(--r);
+      padding: 2rem 1.5rem;
+      margin: 2.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .arch-svg {
+      width: 100%;
+      max-width: 680px;
+      height: auto;
+      display: block;
+    }
+
+    .arch-caption {
+      font-size: 0.8rem;
+      color: var(--muted2);
+      margin-top: 1rem;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    ul, ol {
+      margin-bottom: 1.6rem;
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .tech-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--gborder);
+      border-radius: 8px;
+      padding: 1rem;
+      transition: border-color var(--t);
+    }
+
+    .tech-card:hover {
+      border-color: var(--cyan);
+    }
+
+    .tech-card strong {
+      display: block;
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      margin-bottom: 0.25rem;
+    }
+
+    .tech-card span {
+      font-size: 0.8rem;
+      color: var(--muted2);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gborder);
+      padding: 3rem 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted2);
+    }
+
+    footer a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.1rem; }
+      h2 { font-size: 1.5rem; }
+      p, li { font-size: 0.95rem; }
+      body { line-height: 1.6; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="back-link">← Back to Portfolio</a>
+      <a href="index.html" class="blog-logo">EshaDey<span>.log</span></a>
+    </div>
+    <div class="progress-bar" id="progressBar"></div>
+  </header>
+
+  <!-- MAIN POST CONTENT -->
+  <main>
+    <div class="post-meta">Case Study // Full-Stack Engineering</div>
+    <h1>Scaling AI-Assisted Civic Reporting: CivicConnect</h1>
+    
+    <div class="post-author">
+      <div class="author-avatar">ED</div>
+      <div class="author-info">
+        <div>Esha Dey</div>
+        <span>June 19, 2026 · 6 min read</span>
+      </div>
+    </div>
+
+    <h2>Problem Statement</h2>
+    <p>Modern municipalities often face high friction in citizen-to-government communication. Reporting local infrastructure damages (e.g., potholes, street light outages, or sanitation issues) usually involves obsolete portals, resulting in delayed response times. More importantly, cities face massive duplicates—multiple citizens reporting the same physical pothole. Municipal departments waste valuable engineering and administrative hours manually filtering, deduplicating, and prioritizing incoming complaints.</p>
+
+    <div class="highlight-box">
+      <p>"Without automated deduplication and smart prioritizing, civic complaint databases quickly grow into unstructured backlogs, resulting in resource waste and citizen distrust."</p>
+    </div>
+
+    <h2>Requirements</h2>
+    <p>To address this problem, the platform was designed around a set of core functional and system specifications:</p>
+    <ul>
+      <li><strong>Secure Citizen Authentication</strong>: Single Sign-On (SSO) and session management supporting authenticated reports.</li>
+      <li><strong>Interactive Reporting Feed</strong>: An interface displaying localized civic reports with cluster pins on a live map.</li>
+      <li><strong>Real-time Priority Analysis</strong>: Automatic computation of report urgency based on complaint comments using Natural Language Processing (NLP).</li>
+      <li><strong>Dynamic Deduplication</strong>: Match new reports against the database using semantic similarity algorithms to intercept duplicate filings.</li>
+      <li><strong>Civic Notification Loop</strong>: Push automatic alerts to local civic bodies and report filers upon report verification.</li>
+    </ul>
+
+    <h2>Architecture</h2>
+    <p>CivicConnect uses a modular decoupled service architecture to separate frontend UI concerns from computationally intensive machine learning logic.</p>
+
+    <!-- SVG DIAGRAM -->
+    <div class="arch-container">
+      <svg class="arch-svg" viewBox="0 0 600 320">
+        <!-- Client -->
+        <rect x="20" y="110" width="100" height="50" rx="8" fill="var(--bg-card)" stroke="var(--cyan)" stroke-width="2"/>
+        <text x="70" y="140" fill="var(--white)" font-size="11" font-family="Outfit" font-weight="bold" text-anchor="middle">Next.js Client</text>
+        
+        <!-- Gateway API -->
+        <rect x="190" y="110" width="110" height="50" rx="8" fill="var(--bg-card)" stroke="var(--violet)" stroke-width="2"/>
+        <text x="245" y="140" fill="var(--white)" font-size="11" font-family="Outfit" font-weight="bold" text-anchor="middle">Express Backend</text>
+        
+        <!-- Auth -->
+        <rect x="190" y="20" width="110" height="40" rx="8" fill="var(--bg-card)" stroke="var(--muted2)" stroke-width="1"/>
+        <text x="245" y="45" fill="var(--muted)" font-size="10" font-family="Outfit" text-anchor="middle">Clerk Auth Provider</text>
+
+        <!-- Database -->
+        <rect x="370" y="110" width="90" height="50" rx="8" fill="var(--bg-card)" stroke="#10b981" stroke-width="2"/>
+        <text x="415" y="140" fill="var(--white)" font-size="11" font-family="Outfit" font-weight="bold" text-anchor="middle">MongoDB</text>
+
+        <!-- FastAPI ML -->
+        <rect x="190" y="230" width="110" height="50" rx="8" fill="var(--bg-card)" stroke="#f59e0b" stroke-width="2"/>
+        <text x="245" y="260" fill="var(--white)" font-size="11" font-family="Outfit" font-weight="bold" text-anchor="middle">FastAPI (Python)</text>
+
+        <!-- Connections -->
+        <!-- Next.js to Express -->
+        <path d="M 120 135 L 190 135" stroke="var(--cyan)" stroke-width="2" fill="none"/>
+        <polygon points="190,135 182,130 182,140" fill="var(--cyan)"/>
+
+        <!-- Express to Clerk -->
+        <path d="M 245 110 L 245 60" stroke="var(--muted2)" stroke-width="1.5" stroke-dasharray="3,3" fill="none"/>
+        
+        <!-- Express to MongoDB -->
+        <path d="M 300 135 L 370 135" stroke="#10b981" stroke-width="2" fill="none"/>
+        <polygon points="370,135 362,130 362,140" fill="#10b981"/>
+
+        <!-- Express to FastAPI -->
+        <path d="M 245 160 L 245 230" stroke="#f59e0b" stroke-width="2" fill="none"/>
+        <polygon points="245,230 240,222 250,222" fill="#f59e0b"/>
+
+        <!-- Labeling -->
+        <text x="155" y="128" fill="var(--muted2)" font-size="8" font-family="Fira Code" text-anchor="middle">HTTP/JSON</text>
+        <text x="335" y="128" fill="var(--muted2)" font-size="8" font-family="Fira Code" text-anchor="middle">Mongoose</text>
+        <text x="255" y="200" fill="var(--muted2)" font-size="8" font-family="Fira Code">Py-Requests</text>
+      </svg>
+      <div class="arch-caption">Figure 1.0: Decentralized Microservice Pipeline Flow of CivicConnect</div>
+    </div>
+
+    <h2>Technology Choices</h2>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <strong>Next.js 15</strong>
+        <span>Leveraged React Server Components (RSC) to construct high-speed rendering states with dynamic client-side hydration.</span>
+      </div>
+      <div class="tech-card">
+        <strong>FastAPI & Python</strong>
+        <span>Chosen for high performance, ease of machine learning modeling integration, and async support.</span>
+      </div>
+      <div class="tech-card">
+        <strong>MongoDB</strong>
+        <span>Flexible document-based store suitable for GeoJSON data mappings and civic record schemas.</span>
+      </div>
+      <div class="tech-card">
+        <strong>VADER NLP Lexicon</strong>
+        <span>Rule-based sentiment engine chosen for zero-dependency execution and accuracy on informal slang texts.</span>
+      </div>
+    </div>
+
+    <h2>Challenges Faced</h2>
+    <p>One of the primary roadblocks faced during development was the **ML Model Cold Start Latency**. Because FastAPI was hosted on free cloud tiers (Render), the microservice fell into idle sleep cycles after periods of inactivity. If a citizen reported an issue, the Express server would await the FastAPI container response for up to 50 seconds, creating severe timeout blocks.</p>
+    <p>Secondly, **Semantic Similarity Precision** was difficult to coordinate. Standard TF-IDF calculation often failed when comparing short, varied sentence types (e.g. <em>"broken main road hole"</em> vs <em>"deep pothole on Sector 5 road"</em>).</p>
+
+    <h2>Solutions Implemented</h2>
+    <p>To resolve the latency cold-starts, a **Dual-Node API Proxy Failover** system was implemented. Express attempts to reach a Vercel serverless ML route first; if Vercel fails or rate-limits, it catches the error and queries the backup FastAPI Render service. If both endpoints timeout, it gracefully falls back to a clean, offline Node-based NLP matching logic to keep the user thread responsive.</p>
+    <p>To improve duplicate mapping accuracy, we built a hybrid similarity algorithm combining TF-IDF vectors with **VADER Sentiment Valences**. When a user types a complaint description, the backend calculates both cosine text similarity and sentiment score ranges, filtering matches based on spatial distance grids.</p>
+
+    <pre><code><span class="comment">// Hybrid Sentiment Priority Sorting in Node.js</span>
+<span class="keyword">const</span> <span class="function">calculatePriority</span> = (comments, score) => {
+  <span class="keyword">const</span> valence = <span class="function">parseVaderScore</span>(score); <span class="comment">// returns range [-1, 1]</span>
+  <span class="keyword">let</span> multiplier = <span class="number">1.0</span>;
+
+  <span class="comment">// Match high-priority keywords (e.g. "hazardous", "danger")</span>
+  <span class="keyword">if</span> (<span class="keyword">/danger|hazard|accident|fire/i</span>.<span class="function">test</span>(comments)) {
+    multiplier = <span class="number">1.8</span>;
+  }
+
+  <span class="comment">// Urgency is inversely proportional to sentiment score</span>
+  <span class="keyword">const</span> finalUrgency = (<span class="number">1.0</span> - valence) * multiplier;
+  <span class="keyword">return</span> Math.<span class="function">min</span>(Math.<span class="function">max</span>(finalUrgency, <span class="number">0</span>), <span class="number">10</span>);
+};</code></pre>
+
+    <h2>Future Improvements</h2>
+    <p>For the next iteration, we intend to implement **DBSCAN Spatial Clustering** inside MongoDB. This will allow the platform to dynamically group infinite reports into localized boundaries without manual coordination. We also plan to integrate automated civic worker dispatch workflows linked withTwilio SMS dispatch systems.</p>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Esha Dey. Codebase available on <a href="https://github.com/esha-dey-22/CivicConnect" target="_blank" rel="noopener">GitHub</a>.</p>
+  </footer>
+
+  <script>
+    // READING PROGRESS INDICATOR
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+  </script>
+</body>
+</html>
