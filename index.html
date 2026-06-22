@@ -409,7 +409,7 @@ section.visible .wipe-line{transform:scaleX(1);}
 
 /* HERO */
 #hero{min-height:100vh;display:flex;align-items:flex-start;padding:170px 4% 80px 4%;}
-.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 440px;align-items:flex-start;gap:4rem;}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 310px;align-items:flex-start;gap:4rem;}
 .hero-badge{display:inline-flex;align-items:center;gap:.48rem;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.33rem .95rem;border-radius:100px;background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.24);color:var(--green);margin-bottom:1.3rem;}
 .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.5s ease-in-out infinite;}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,.5);}50%{box-shadow:0 0 0 6px rgba(0,255,136,0);}}
@@ -465,155 +465,14 @@ section.visible .wipe-line{transform:scaleX(1);}
 .dot-cyan{background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
 .status-item strong{color:var(--white);}
 
-/* GALAXY CORE & ORBITS */
-.orbit-container {
-  position: relative;
-  width: 440px;
-  height: 440px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem auto;
-}
-.av-img {
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--bg);
-  box-shadow: 0 0 30px rgba(0, 229, 255, 0.25), inset 0 0 15px rgba(0, 229, 255, 0.4);
-  z-index: 10;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: box-shadow var(--t), transform var(--t);
-}
-.av-img:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 35px rgba(0, 229, 255, 0.45);
-}
-.core-glow-effect {
-  position: absolute;
-  width: 210px;
-  height: 210px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.18) 0%, transparent 70%);
-  animation: coreBreathing 4s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 5;
-}
-@keyframes coreBreathing {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.1); opacity: 0.85; }
-}
-.orbit-ring-1 {
-  position: absolute;
-  width: 270px;
-  height: 270px;
-  border: 1px dashed rgba(0, 229, 255, 0.15);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 4;
-}
-.orbit-ring-2 {
-  position: absolute;
-  width: 370px;
-  height: 370px;
-  border: 1px dashed rgba(168, 85, 247, 0.12);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 3;
-}
-.orbit-marker {
-  position: absolute;
-  background: rgba(11, 15, 25, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--gborder);
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-family: var(--font-d);
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--white);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  z-index: 12;
-  pointer-events: auto;
-  transition: border-color var(--t), box-shadow var(--t), color var(--t);
-  text-decoration: none;
-}
-.orbit-marker:hover {
-  border-color: var(--cyan);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
-  color: var(--cyan);
-}
-.marker-leetcode {
-  animation: orbit-leetcode 45s linear infinite;
-}
-.marker-certs {
-  animation: orbit-certs 45s linear infinite;
-}
-.marker-accenture {
-  animation: orbit-accenture 60s linear infinite;
-}
-.marker-projects {
-  animation: orbit-projects 60s linear infinite;
-}
-
-@keyframes orbit-leetcode {
-  from { transform: translate(-50%, -50%) rotate(0deg) translateX(135px) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg) translateX(135px) rotate(-360deg); }
-}
-@keyframes orbit-certs {
-  from { transform: translate(-50%, -50%) rotate(180deg) translateX(135px) rotate(-180deg); }
-  to { transform: translate(-50%, -50%) rotate(540deg) translateX(135px) rotate(-540deg); }
-}
-@keyframes orbit-accenture {
-  from { transform: translate(-50%, -50%) rotate(90deg) translateX(185px) rotate(-90deg); }
-  to { transform: translate(-50%, -50%) rotate(450deg) translateX(185px) rotate(-450deg); }
-}
-@keyframes orbit-projects {
-  from { transform: translate(-50%, -50%) rotate(270deg) translateX(185px) rotate(-270deg); }
-  to { transform: translate(-50%, -50%) rotate(630deg) translateX(185px) rotate(-630deg); }
-}
-
-.orbit-markers-mobile-wrap {
-  display: none;
-}
-
-/* Responsive adjustments for orbits */
-@media (max-width: 768px) {
-  .orbit-container {
-    width: 280px !important;
-    height: 280px !important;
-  }
-  .orbit-ring-1, .orbit-ring-2 {
-    display: none !important;
-  }
-  .orbit-container .orbit-marker {
-    display: none !important;
-  }
-  .orbit-marker {
-    position: static !important;
-    transform: none !important;
-    animation: none !important;
-    margin: 5px !important;
-  }
-  .orbit-markers-mobile-wrap {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    margin-top: 1rem !important;
-    pointer-events: auto !important;
-  }
-  .av-img {
-    width: 150px !important;
-    height: 150px !important;
-  }
-}
+/* AVATAR & ORBITS */
+.avatar-wrap{position:relative;width:300px;height:300px;flex-shrink:0;pointer-events:none;}
+.av-ring-outer{position:absolute;inset:-18px;border-radius:50%;border:1px solid rgba(0,229,255,.13);animation:spin 22s linear infinite;}
+.av-ring-outer::before{content:'';position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:var(--cyan);transform:translateX(-50%);box-shadow:0 0 14px var(--cyan);}
+.av-ring-inner{position:absolute;inset:-7px;border-radius:50%;border:1.5px solid transparent;background:linear-gradient(135deg,var(--cyan),var(--violet2)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;animation:spin 9s linear infinite reverse;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.av-img{width:300px;height:300px;border-radius:50%;object-fit:cover;object-position:top center;border:3px solid var(--bg);position:relative;z-index:2;filter:brightness(.97) contrast(1.05) saturate(1.08);pointer-events:auto;}
+.av-glow{position:absolute;inset:0;border-radius:50%;z-index:3;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(0,229,255,.1) 0%,transparent 65%);}
 
 /* ENGINEERING SNAPSHOT DASHBOARD */
 #snapshot {
@@ -2793,44 +2652,45 @@ footer span{color:var(--cyan);}
       </div>
     </div>
     <div class="avatar-wrap">
-      <div class="orbit-container">
-        <div class="core-glow-effect"></div>
-        <div class="orbit-ring-1"></div>
-        <div class="orbit-ring-2"></div>
-        
-        <!-- Orbit markers -->
-        <a href="https://leetcode.com/u/ed0629/" target="_blank" rel="noopener" class="orbit-marker marker-leetcode">
-          LeetCode: 800+
-        </a>
-        <a href="#experience" class="orbit-marker marker-accenture">
-          Accenture: AASE
-        </a>
-        <a href="#projects" class="orbit-marker marker-projects">
-          Projects: 5+ Built
-        </a>
-        <a href="#achievements" class="orbit-marker marker-certs">
-          IBM Certified
-        </a>
-      <img src="20250304_121403.jpg" alt="Esha Dey" class="av-img"/>
+      <div class="av-ring-outer"></div>
+      <div class="av-ring-inner"></div>
+      <div class="av-orbit">
+        <div class="orbit-item item-js" data-tooltip="JavaScript">
+          <svg width="22" height="22" viewBox="0 0 128 128" style="display: block;">
+            <path class="path-javascript" d="M66.119 107.513c-1.845 3.749-5.367 6.212-9.448 7.401-6.271 1.44-12.269.619-16.731-2.059-2.986-1.832-5.318-4.652-6.901-7.901l9.52-5.83c.083.035.333.487.667 1.071 1.214 2.034 2.261 3.474 4.319 4.485 2.022.69 6.461 1.131 8.175-2.427 1.047-1.81.714-7.628.714-14.065C58.433 78.073 58.48 68 58.48 58h11.709c0 11 .06 21.418 0 32.152.025 6.58.596 12.446-2.07 17.361zm48.574-3.308c-4.07 13.922-26.762 14.374-35.83 5.176-1.916-2.165-3.117-3.296-4.26-5.795 4.819-2.772 4.819-2.772 9.508-5.485 2.547 3.915 4.902 6.068 9.139 6.949 5.748.702 11.531-1.273 10.234-7.378-1.333-4.986-11.77-6.199-18.873-11.531-7.211-4.843-8.901-16.611-2.975-23.335 1.975-2.487 5.343-4.343 8.877-5.235l3.688-.477c7.081-.143 11.507 1.727 14.756 5.355.904.916 1.642 1.904 3.022 4.045-3.772 2.404-3.76 2.381-9.163 5.879-1.154-2.486-3.069-4.046-5.093-4.724-3.142-.952-7.104.083-7.926 3.403-.285 1.023-.226 1.975.227 3.665 1.273 2.903 5.545 4.165 9.377 5.926 11.031 4.474 14.756 9.271 15.672 14.981.882 4.916-.213 8.105-.38 8.581z"/>
+          </svg>
+        </div>
+        <div class="orbit-item item-ts" data-tooltip="TypeScript">
+          <svg width="22" height="22" viewBox="0 0 128 128" style="display: block;">
+            <path class="path-typescript" d="M102.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1A23 23 0 0180 109.19c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73l4.6-2.64 3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H57.16v46.23H45.65V69.26H29.38v-5a49.19 49.19 0 01.14-5.16c.06-.08 10-.12 22-.1h21.81z"/>
+          </svg>
+        </div>
+        <div class="orbit-item item-py" data-tooltip="Python">
+          <svg width="22" height="22" viewBox="0 0 128 128" style="display: block;">
+            <path class="path-python-top" d="M49.33 62h29.159C86.606 62 93 55.132 93 46.981V19.183c0-7.912-6.632-13.856-14.555-15.176-5.014-.835-10.195-1.215-15.187-1.191-4.99.023-9.612.448-13.805 1.191C37.098 6.188 35 10.758 35 19.183V30h29v4H23.776c-8.484 0-15.914 5.108-18.237 14.811-2.681 11.12-2.8 17.919 0 29.53C7.614 86.983 12.569 93 21.054 93H31V79.952C31 70.315 39.428 62 49.33 62zm-1.838-39.11c-3.026 0-5.478-2.479-5.478-5.545 0-3.079 2.451-5.581 5.478-5.581 3.015 0 5.479 2.502 5.479 5.581-.001 3.066-2.465 5.545-5.479 5.545z"/>
+            <path class="path-python-bottom" d="M74.789 25.921C120.183 40.363 116.178 34 107.682 34H97v12.981C97 57.031 88.206 65 78.489 65H49.33C41.342 65 35 72.326 35 80.326v27.8c0 7.91 6.745 12.564 14.462 14.834 9.242 2.717 17.994 3.208 29.051 0C85.862 120.831 93 116.549 93 108.126V97H64v-4h43.682c8.484 0 11.647-5.776 14.599-14.66 3.047-9.145 2.916-17.799 0-29.529zm-41.955 55.606c3.027 0 5.479 2.479 5.479 5.547 0 3.076-2.451 5.579-5.479 5.579-3.015 0-5.478-2.502-5.478-5.579 0-3.068 2.463-5.547 5.478-5.547z"/>
+          </svg>
+        </div>
+        <div class="orbit-item item-java" data-tooltip="Java">
+          <svg width="22" height="22" viewBox="0 0 128 128" style="display: block;">
+            <path class="path-blue" d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z"/>
+            <path class="path-red" d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z"/>
+            <path class="path-blue" d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z"/>
+            <path class="path-red" d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z"/>
+            <path class="path-blue" d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z"/>
+          </svg>
+        </div>
+        <div class="orbit-item item-cpp" data-tooltip="C++">
+          <svg width="22" height="22" viewBox="0 0 128 128" style="display: block;">
+            <path class="path-cpp" d="M63.443 0c-1.782 0-3.564.39-4.916 1.172L11.594 28.27C8.89 29.828 6.68 33.66 6.68 36.78v54.197c0 1.562.55 3.298 1.441 4.841l-.002.002c.89 1.543 2.123 2.89 3.475 3.672l46.931 27.094c2.703 1.562 7.13 1.562 9.832 0h.002l46.934-27.094c1.352-.78 2.582-2.129 3.473-3.672.89-1.543 1.441-3.28 1.441-4.843V36.779c0-1.557-.55-3.295-1.441-4.838v-.002c-.891-1.545-2.121-2.893-3.473-3.67L68.359 1.173C67.008.39 65.226 0 63.443 0zm.002 26.033c13.465 0 26.02 7.246 32.77 18.91l-16.38 9.479c-3.372-5.836-9.66-9.467-16.39-9.467-10.432 0-18.922 8.49-18.922 18.924S53.013 82.8 63.445 82.8c6.735 0 13.015-3.625 16.395-9.465l16.375 9.477c-6.746 11.662-19.305 18.91-32.77 18.91-20.867 0-37.843-16.977-37.843-37.844s16.976-37.844 37.843-37.844v-.002zM92.881 57.57h4.201v4.207h4.203v4.203h-4.203v4.207h-4.201V65.98h-4.207v-4.203h4.207V57.57zm15.765 0h4.208v4.207h4.203v4.203h-4.203v4.207h-4.208V65.98h-4.205v-4.203h4.205V57.57z"/>
+          </svg>
+        </div>
+        <div class="orbit-item item-docker" data-tooltip="Docker">🐋</div>
+      </div>
+      <img src="20250304_121403.jpg" class="avatar-img" alt="Esha Dey Profile" width="300" height="300">
       <div class="av-glow"></div>
+      <div class="avatar-tooltip">Click to hear welcome greeting!</div>
     </div>
-    <div class="avatar-tooltip">Click to hear welcome greeting!</div>
-    <!-- Mobile fallback wrapper -->
-    <div class="orbit-markers-mobile-wrap">
-      <a href="https://leetcode.com/u/ed0629/" target="_blank" rel="noopener" class="orbit-marker">
-        LeetCode: 800+
-      </a>
-      <a href="#experience" class="orbit-marker">
-        Accenture: AASE
-      </a>
-      <a href="#projects" class="orbit-marker">
-        Projects: 5+ Built
-      </a>
-      <a href="#achievements" class="orbit-marker">
-        IBM Certified
-      </a>
-    </div>
-  </div>
 </section>
 
 <!-- ENGINEERING SNAPSHOT DASHBOARD -->
@@ -5760,38 +5620,29 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
     tryAutoplay();
     
     // Make the profile avatar wrap clickable to replay/play greeting at any time
-    var orbitContainer = document.querySelector('.orbit-container');
-    var avatarWrap = document.querySelector('.avatar-wrap');
-    if (orbitContainer && avatarWrap) {
-      orbitContainer.style.cursor = 'pointer';
+    var avatar = document.querySelector('.avatar-wrap');
+    if (avatar) {
+      avatar.style.cursor = 'pointer';
       
       // Dynamic tooltip text for mobile
-      var tooltip = avatarWrap.querySelector('.avatar-tooltip');
+      var tooltip = avatar.querySelector('.avatar-tooltip');
       if (tooltip && window.innerWidth < 992) {
         tooltip.textContent = 'Tap to hear welcome greeting!';
       }
 
       var tooltipTimeout;
-      orbitContainer.addEventListener('click', function (e) {
+      avatar.addEventListener('click', function (e) {
         e.stopPropagation();
         playWelcome();
 
         // Show/toggle tooltip on click/tap with auto-fade timer (especially for touch viewports)
         if (tooltip) {
-          avatarWrap.classList.add('active-tooltip');
+          avatar.classList.add('active-tooltip');
           clearTimeout(tooltipTimeout);
           tooltipTimeout = setTimeout(function () {
-            avatarWrap.classList.remove('active-tooltip');
+            avatar.classList.remove('active-tooltip');
           }, 3000);
         }
-      });
-      
-      // Prevent clicks on orbit markers from triggering welcome greeting
-      var orbitMarkers = orbitContainer.querySelectorAll('.orbit-marker');
-      orbitMarkers.forEach(function (marker) {
-        marker.addEventListener('click', function (e) {
-          e.stopPropagation();
-        });
       });
     }
   });
@@ -5958,11 +5809,39 @@ document.querySelectorAll('.proj-card,.sk-card').forEach(function (card) {
   document.addEventListener('themeChanged', initConstellation);
 }());
 
-/* ─── AVATAR TOOLTIP CLICK OUTSIDE CLOSE ────────────────────────────────── */
+/* ─── ORBITING TECH BADGES TOUCH TOOLTIPS ────────────────────────────────── */
 (function () {
   var avatarWrap = document.querySelector('.avatar-wrap');
+  var orbitItems = document.querySelectorAll('.orbit-item');
+  if (!avatarWrap || !orbitItems.length) return;
+
+  orbitItems.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+      e.stopPropagation(); // Stop event bubbling to avatar-wrap greeting player
+      
+      var isActive = item.classList.contains('active-tooltip');
+      
+      // Clear active class from all items
+      orbitItems.forEach(function (i) {
+        i.classList.remove('active-tooltip');
+      });
+      avatarWrap.classList.remove('orbit-paused');
+
+      // Toggle active state for current item
+      if (!isActive) {
+        item.classList.add('active-tooltip');
+        avatarWrap.classList.add('orbit-paused');
+      }
+    });
+  });
+
+  // Close tooltips when clicking anywhere else on page
   document.addEventListener('click', function () {
+    orbitItems.forEach(function (i) {
+      i.classList.remove('active-tooltip');
+    });
     if (avatarWrap) {
+      avatarWrap.classList.remove('orbit-paused');
       avatarWrap.classList.remove('active-tooltip');
     }
   });
